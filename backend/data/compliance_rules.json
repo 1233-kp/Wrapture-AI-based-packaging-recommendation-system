@@ -1,0 +1,83 @@
+{
+  "_meta": {
+    "description": "A small, hand-curated set of well-known, generally-cited Indian food-packaging regulatory considerations (FSSAI, BIS, Plastic Waste Management/EPR, Legal Metrology). This is explicitly NOT a legal compliance engine or an exhaustive regulatory database — it surfaces informational flags for things worth independently verifying, evaluated by engine/compliance_check.py and returned as compliance_notes in /recommend/detailed. Every rule is checkable against data this project already has (material category/id, recyclability_rating text, commodity acidity/category) — none of it requires a field we don't otherwise have real grounding for.",
+    "confidence_levels": {
+      "high": "Well-established, widely and consistently cited requirement/concern in general Indian food-packaging regulatory discussion.",
+      "medium": "Generally accepted guidance, but with real-world variation (by supplier, format, or exact regional/product circumstances) that keeps this from being a precise universal rule.",
+      "low": "A genuine, commonly-raised consideration, but one where the specific applicability, thresholds, or current rule text vary or change enough that this is deliberately phrased as a prompt to verify, not a citation of fixed criteria."
+    },
+    "citation_discipline": "general_reference names a general regulatory area/framework (e.g. 'FSSAI Packaging & Labelling Regulations'), never a specific clause/section number we are not genuinely confident is both correct and current. Where we're not sure of the exact provision, the rule text and reference are phrased generally on purpose — a wrong specific citation would be worse than a general one."
+  },
+  "rules": [
+    {
+      "id": "food_contact_layer_verification",
+      "description": "This material is typically used as a barrier or structural layer WITHIN a multi-layer laminate, rather than being the innermost food-contact layer itself (that role is usually filled by a separate polyolefin sealant layer). Confirm the actual food-contact (innermost) layer of your final laminate structure is independently certified food-grade — a barrier layer's own properties don't automatically make the whole laminate food-contact-safe.",
+      "trigger": { "type": "material_id_in", "values": ["metalized_film", "aluminum_foil_laminate", "evoh_film", "oriented_nylon"] },
+      "confidence": "medium",
+      "general_reference": "FSSAI Packaging & Labelling Regulations — food-contact material requirements"
+    },
+    {
+      "id": "acidic_food_bare_foil_caution",
+      "description": "This commodity is acidic and the recommended material includes an aluminum foil layer. Bare/uncoated aluminum foil can corrode and react with acidic foods — confirm the food-contact side of the laminate has an intact protective coating, not exposed bare foil.",
+      "trigger": { "type": "material_id_in_and_commodity_acidic", "values": ["aluminum_foil_laminate"] },
+      "confidence": "high",
+      "general_reference": "FSSAI Packaging & Labelling Regulations — food-contact material compatibility"
+    },
+    {
+      "id": "resin_identification_code_labeling",
+      "description": "Plastic packaging is generally expected to carry the resin identification code (the numbered chasing-arrows symbol, 1-7) to support correct consumer/recycler sorting. Confirm this marking is included on the final printed pack.",
+      "trigger": { "type": "material_category_in", "values": ["flexible_film", "flexible_film_or_rigid", "rigid_or_film", "flexible_film_laminate"] },
+      "confidence": "high",
+      "general_reference": "BIS packaging standards / Plastic Waste Management Rules — resin identification coding"
+    },
+    {
+      "id": "opaque_pack_labeling_reminder",
+      "description": "This material's typical commercial format is opaque or fully printed over, so the product itself won't be visible to the end consumer. Make sure all mandatory pack declarations (net quantity, MRP, manufacturing/expiry date, FSSAI license number) are clearly printed on the pack, since visual inspection of the product isn't possible as a fallback.",
+      "trigger": { "type": "material_category_in", "values": ["flexible_film_laminate", "rigid_paper"] },
+      "confidence": "medium",
+      "general_reference": "Legal Metrology (Packaged Commodities) Rules; FSSAI labelling requirements"
+    },
+    {
+      "id": "single_use_plastic_general_caution",
+      "description": "Thin flexible plastic film formats like this one are the category most commonly discussed under evolving single-use-plastic restrictions in India. Specific banned-item lists and thickness thresholds vary by state and change over time — confirm current applicability for your exact format/gauge before finalizing, rather than assuming this is unaffected.",
+      "trigger": { "type": "material_id_in", "values": ["ldpe", "micro_perforated_film", "oriented_nylon"] },
+      "confidence": "low",
+      "general_reference": "Plastic Waste Management Rules (as amended) — single-use plastics"
+    },
+    {
+      "id": "epr_recyclability_complexity",
+      "description": "Multi-layer/multi-material laminate formats like this one are widely noted as harder to mechanically recycle than a single-polymer package, which can complicate meeting Extended Producer Responsibility (EPR) recyclability expectations. This doesn't mean the material is non-compliant — it means the EPR/recyclability story for this format needs to be worked out explicitly rather than assumed.",
+      "trigger": { "type": "material_id_in", "values": ["metalized_film", "aluminum_foil_laminate", "evoh_film", "oriented_nylon"] },
+      "confidence": "high",
+      "general_reference": "Extended Producer Responsibility (EPR) guidelines under the Plastic Waste Management Rules"
+    },
+    {
+      "id": "compostable_certification_note",
+      "description": "This material is industrially compostable, which requires access to a municipal/industrial composting facility — it will NOT break down correctly via standard curbside recycling or uncontrolled home composting, and shouldn't be described to consumers as generically 'recyclable'. Confirm compostability certification against the relevant BIS compostable-plastics standard for your specific supplier's material before making any compostability/EPR claim on the pack.",
+      "trigger": { "type": "material_id_in", "values": ["pla_biodegradable_film"] },
+      "confidence": "medium",
+      "general_reference": "BIS compostable-plastics certification standards"
+    },
+    {
+      "id": "microwave_safety_verification_note",
+      "description": "This material is sometimes used for microwave-safe containers, but microwave suitability depends on the exact formulation, additives, and wall thickness of a specific product — it isn't a property of the base resin alone. Independently test and, if applicable, label microwave suitability rather than assuming it from the material choice.",
+      "trigger": { "type": "material_id_in", "values": ["pp"] },
+      "confidence": "medium",
+      "general_reference": "FSSAI Packaging & Labelling Regulations — food-contact material safety"
+    },
+    {
+      "id": "imported_material_fssai_verification",
+      "description": "This material is commonly import-dependent in the Indian market. Imported food-contact packaging materials still need to independently meet FSSAI food-contact material safety requirements — a certification or approval from the country of origin isn't automatically equivalent or sufficient on its own.",
+      "trigger": { "type": "material_id_in", "values": ["pla_biodegradable_film"] },
+      "confidence": "medium",
+      "general_reference": "FSSAI Packaging & Labelling Regulations — food-contact material requirements for imported materials"
+    },
+    {
+      "id": "fresh_produce_labeling_exemption_note",
+      "description": "Fresh, unprocessed produce sold in breathable/vented packaging can fall under different (often lighter) labeling expectations than sealed/processed food under general FSSAI packaging rules. Verify whether this specific product qualifies for any fresh-produce labeling treatment rather than assuming standard processed-food labeling requirements apply unchanged.",
+      "trigger": { "type": "material_breathable_and_commodity_category_in", "values": ["fresh_fruit", "fresh_vegetable"] },
+      "confidence": "low",
+      "general_reference": "FSSAI Packaging & Labelling Regulations — fresh produce labeling"
+    }
+  ]
+}

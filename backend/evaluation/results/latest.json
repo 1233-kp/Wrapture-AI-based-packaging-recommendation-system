@@ -1,0 +1,1166 @@
+{
+  "summary": {
+    "generated_at": "2026-09-23T06:31:13.441484+00:00",
+    "total_cases": 50,
+    "errored_cases": 0,
+    "top1_agreement_rate_pct": 92.0,
+    "top3_agreement_rate_pct": 98.0,
+    "category_breakdown": {
+      "bakery": {
+        "total": 3,
+        "top1_agreement_rate_pct": 33.3,
+        "top3_agreement_rate_pct": 66.7
+      },
+      "beverages": {
+        "total": 1,
+        "top1_agreement_rate_pct": 100.0,
+        "top3_agreement_rate_pct": 100.0
+      },
+      "dairy": {
+        "total": 7,
+        "top1_agreement_rate_pct": 100.0,
+        "top3_agreement_rate_pct": 100.0
+      },
+      "dry_goods_grains": {
+        "total": 7,
+        "top1_agreement_rate_pct": 100.0,
+        "top3_agreement_rate_pct": 100.0
+      },
+      "fresh_fruit": {
+        "total": 6,
+        "top1_agreement_rate_pct": 100.0,
+        "top3_agreement_rate_pct": 100.0
+      },
+      "fresh_vegetable": {
+        "total": 5,
+        "top1_agreement_rate_pct": 100.0,
+        "top3_agreement_rate_pct": 100.0
+      },
+      "frozen_foods": {
+        "total": 1,
+        "top1_agreement_rate_pct": 100.0,
+        "top3_agreement_rate_pct": 100.0
+      },
+      "meat_fish": {
+        "total": 10,
+        "top1_agreement_rate_pct": 80.0,
+        "top3_agreement_rate_pct": 100.0
+      },
+      "nuts_dried_fruits": {
+        "total": 1,
+        "top1_agreement_rate_pct": 100.0,
+        "top3_agreement_rate_pct": 100.0
+      },
+      "ready_to_eat_snacks": {
+        "total": 1,
+        "top1_agreement_rate_pct": 100.0,
+        "top3_agreement_rate_pct": 100.0
+      },
+      "spices": {
+        "total": 8,
+        "top1_agreement_rate_pct": 100.0,
+        "top3_agreement_rate_pct": 100.0
+      }
+    },
+    "mismatches": [
+      {
+        "case_id": "fish_default",
+        "commodity_id": "fish_fresh_whole",
+        "commodity_category": "meat_fish",
+        "conditions": {},
+        "expected_material_ids": [
+          "evoh_film",
+          "ldpe",
+          "oriented_nylon"
+        ],
+        "actual_top1_material_id": "metalized_film",
+        "actual_top3_material_ids": [
+          "aluminum_foil_laminate",
+          "evoh_film",
+          "metalized_film"
+        ],
+        "top1_hit": false,
+        "top3_hit": true,
+        "source_note": "Whole fresh fish: vacuum barrier laminate for extended cold-chain transport, or simple PE wrap for short-term on-ice display."
+      },
+      {
+        "case_id": "shrimp_default",
+        "commodity_id": "shrimp_fresh",
+        "commodity_category": "meat_fish",
+        "conditions": {},
+        "expected_material_ids": [
+          "evoh_film",
+          "oriented_nylon"
+        ],
+        "actual_top1_material_id": "metalized_film",
+        "actual_top3_material_ids": [
+          "aluminum_foil_laminate",
+          "evoh_film",
+          "metalized_film"
+        ],
+        "top1_hit": false,
+        "top3_hit": true,
+        "source_note": "Fresh shrimp is highly perishable and standardly vacuum-packed in a high-barrier laminate."
+      },
+      {
+        "case_id": "bread_default",
+        "commodity_id": "white_bread",
+        "commodity_category": "bakery",
+        "conditions": {},
+        "expected_material_ids": [
+          "ldpe",
+          "pp"
+        ],
+        "actual_top1_material_id": "hdpe",
+        "actual_top3_material_ids": [
+          "hdpe",
+          "pet",
+          "pp"
+        ],
+        "top1_hit": false,
+        "top3_hit": true,
+        "source_note": "Sliced bread bags are classically PP or LDPE."
+      },
+      {
+        "case_id": "cake_default",
+        "commodity_id": "cake_frosted",
+        "commodity_category": "bakery",
+        "conditions": {},
+        "expected_material_ids": [
+          "pet"
+        ],
+        "actual_top1_material_id": "metalized_film",
+        "actual_top3_material_ids": [
+          "aluminum_foil_laminate",
+          "evoh_film",
+          "metalized_film"
+        ],
+        "top1_hit": false,
+        "top3_hit": false,
+        "source_note": "Frosted cakes/pastries are near-universally sold in PET clamshell containers."
+      }
+    ],
+    "errors": []
+  },
+  "cases": [
+    {
+      "case_id": "banana_default",
+      "commodity_id": "banana",
+      "commodity_category": "fresh_fruit",
+      "conditions": {},
+      "expected_material_ids": [
+        "hdpe",
+        "ldpe",
+        "micro_perforated_film",
+        "pp",
+        "vented_pet_clamshell"
+      ],
+      "actual_top1_material_id": "vented_pet_clamshell",
+      "actual_top3_material_ids": [
+        "hdpe",
+        "micro_perforated_film",
+        "vented_pet_clamshell"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Bananas are commonly sold loose or in simple vented/perforated PE or PP retail bags; vented trays/clamshells are also a real export/premium-retail format for a 'high' respiration fruit like this. (vented_pet_clamshell added after the packaging catalogue gained a distinct vented-tray material, separate from plain unvented PET.)"
+    },
+    {
+      "case_id": "apple_default",
+      "commodity_id": "apple",
+      "commodity_category": "fresh_fruit",
+      "conditions": {},
+      "expected_material_ids": [
+        "hdpe",
+        "ldpe",
+        "micro_perforated_film",
+        "pet",
+        "pp"
+      ],
+      "actual_top1_material_id": "hdpe",
+      "actual_top3_material_ids": [
+        "hdpe",
+        "pet",
+        "pp"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Apples: perforated PE/PP bags or PET clamshell trays are standard retail formats."
+    },
+    {
+      "case_id": "mango_default",
+      "commodity_id": "mango",
+      "commodity_category": "fresh_fruit",
+      "conditions": {},
+      "expected_material_ids": [
+        "hdpe",
+        "ldpe",
+        "micro_perforated_film",
+        "pp",
+        "vented_pet_clamshell"
+      ],
+      "actual_top1_material_id": "vented_pet_clamshell",
+      "actual_top3_material_ids": [
+        "hdpe",
+        "micro_perforated_film",
+        "vented_pet_clamshell"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Mangoes commonly ship in perforated PE/PP bags or open trays for a climacteric fruit; vented clamshell trays are a real export-format alternative given mango's 'high' respiration rate. (vented_pet_clamshell added \u2014 see banana_default note.)"
+    },
+    {
+      "case_id": "strawberry_default",
+      "commodity_id": "strawberry",
+      "commodity_category": "fresh_fruit",
+      "conditions": {},
+      "expected_material_ids": [
+        "micro_perforated_film",
+        "vented_pet_clamshell"
+      ],
+      "actual_top1_material_id": "micro_perforated_film",
+      "actual_top3_material_ids": [
+        "ldpe",
+        "micro_perforated_film",
+        "vented_pet_clamshell"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Strawberries are near-universally sold in vented PET clamshells, or in micro-perforated bags for bulk/farmers-market formats. Originally this case accepted plain 'pet' as a stand-in for 'vented PET clamshell' because the catalogue had no distinct vented-tray material yet \u2014 that was an imprecise proxy, not the actual intent, so it's corrected now that vented_pet_clamshell exists as its own entry. Plain unvented PET is NOT accepted here: a 'very_high' respiration item like strawberry genuinely needs active airflow, which an unvented rigid container doesn't provide."
+    },
+    {
+      "case_id": "grapes_default",
+      "commodity_id": "grapes",
+      "commodity_category": "fresh_fruit",
+      "conditions": {},
+      "expected_material_ids": [
+        "hdpe",
+        "ldpe",
+        "pet",
+        "pp"
+      ],
+      "actual_top1_material_id": "hdpe",
+      "actual_top3_material_ids": [
+        "hdpe",
+        "pet",
+        "pp"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Grapes ship in PP/PE bags or PET clamshells/bags depending on retailer."
+    },
+    {
+      "case_id": "tomato_default",
+      "commodity_id": "tomato",
+      "commodity_category": "fresh_vegetable",
+      "conditions": {},
+      "expected_material_ids": [
+        "hdpe",
+        "ldpe",
+        "micro_perforated_film",
+        "pet",
+        "pp"
+      ],
+      "actual_top1_material_id": "hdpe",
+      "actual_top3_material_ids": [
+        "hdpe",
+        "ldpe",
+        "pp"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Tomatoes: PET/PP trays with overwrap, or perforated PE bags for loose tomatoes."
+    },
+    {
+      "case_id": "potato_default",
+      "commodity_id": "potato",
+      "commodity_category": "fresh_vegetable",
+      "conditions": {},
+      "expected_material_ids": [
+        "hdpe",
+        "ldpe",
+        "micro_perforated_film",
+        "paperboard",
+        "pp"
+      ],
+      "actual_top1_material_id": "hdpe",
+      "actual_top3_material_ids": [
+        "hdpe",
+        "pet",
+        "pp"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Potatoes ship in breathable PE mesh-style or paper/paperboard sacks \u2014 our catalogue has no mesh netting material, so this case accepts the closest breathable analogues."
+    },
+    {
+      "case_id": "spinach_default",
+      "commodity_id": "spinach",
+      "commodity_category": "fresh_vegetable",
+      "conditions": {},
+      "expected_material_ids": [
+        "ldpe",
+        "micro_perforated_film",
+        "pet"
+      ],
+      "actual_top1_material_id": "micro_perforated_film",
+      "actual_top3_material_ids": [
+        "ldpe",
+        "micro_perforated_film",
+        "vented_pet_clamshell"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Bagged/clamshell leafy greens: PET clamshell or a vented/perforated PE bag are standard."
+    },
+    {
+      "case_id": "carrot_default",
+      "commodity_id": "carrot",
+      "commodity_category": "fresh_vegetable",
+      "conditions": {},
+      "expected_material_ids": [
+        "hdpe",
+        "ldpe",
+        "micro_perforated_film",
+        "pp"
+      ],
+      "actual_top1_material_id": "hdpe",
+      "actual_top3_material_ids": [
+        "hdpe",
+        "pet",
+        "pp"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Carrots commonly ship in perforated PE bags for retail."
+    },
+    {
+      "case_id": "onion_default",
+      "commodity_id": "onion",
+      "commodity_category": "fresh_vegetable",
+      "conditions": {},
+      "expected_material_ids": [
+        "hdpe",
+        "ldpe",
+        "micro_perforated_film",
+        "paperboard",
+        "pp"
+      ],
+      "actual_top1_material_id": "hdpe",
+      "actual_top3_material_ids": [
+        "hdpe",
+        "pet",
+        "pp"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Onions ship in breathable mesh/net bags in practice \u2014 again the closest catalogue analogues are accepted since we don't model netting."
+    },
+    {
+      "case_id": "milk_default",
+      "commodity_id": "milk_pasteurized",
+      "commodity_category": "dairy",
+      "conditions": {},
+      "expected_material_ids": [
+        "glass",
+        "hdpe"
+      ],
+      "actual_top1_material_id": "hdpe",
+      "actual_top3_material_ids": [
+        "hdpe",
+        "metalized_film",
+        "pp"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Pasteurized milk: HDPE jugs/bottles or glass bottles are the classic formats."
+    },
+    {
+      "case_id": "cheddar_default",
+      "commodity_id": "cheddar_cheese",
+      "commodity_category": "dairy",
+      "conditions": {},
+      "expected_material_ids": [
+        "aluminum_foil_laminate",
+        "evoh_film",
+        "metalized_film",
+        "oriented_nylon"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "evoh_film",
+        "metalized_film"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Hard cheese is typically vacuum-packed in a high-O2-barrier laminate (nylon/EVOH) to prevent mold and oxidation. metalized_film added (Day 5): its OTR/WVTR are comparably excellent and it's a real, lighter/cheaper barrier option some cheese brands use \u2014 not just a rules-engine artifact."
+    },
+    {
+      "case_id": "yogurt_default",
+      "commodity_id": "yogurt",
+      "commodity_category": "dairy",
+      "conditions": {},
+      "expected_material_ids": [
+        "hdpe",
+        "pet",
+        "pp"
+      ],
+      "actual_top1_material_id": "hdpe",
+      "actual_top3_material_ids": [
+        "hdpe",
+        "metalized_film",
+        "pp"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Yogurt cups are almost always PP or PET (sometimes HDPE for larger tubs)."
+    },
+    {
+      "case_id": "butter_default",
+      "commodity_id": "butter",
+      "commodity_category": "dairy",
+      "conditions": {},
+      "expected_material_ids": [
+        "aluminum_foil_laminate",
+        "metalized_film",
+        "pp"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "evoh_film",
+        "metalized_film"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Butter is classically foil-wrapped, or sold in PP tubs for spreadable formats. metalized_film added (Day 5): functionally a close cousin of foil wrap for oxidation/rancidity protection, and genuinely used for butter/margarine in some markets."
+    },
+    {
+      "case_id": "rice_default",
+      "commodity_id": "rice",
+      "commodity_category": "dry_goods_grains",
+      "conditions": {},
+      "expected_material_ids": [
+        "hdpe",
+        "pet",
+        "pp"
+      ],
+      "actual_top1_material_id": "hdpe",
+      "actual_top3_material_ids": [
+        "glass",
+        "hdpe",
+        "pp"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Rice commonly ships in woven PP or HDPE bags, or PET jars/containers for premium retail."
+    },
+    {
+      "case_id": "flour_default",
+      "commodity_id": "wheat_flour",
+      "commodity_category": "dry_goods_grains",
+      "conditions": {},
+      "expected_material_ids": [
+        "hdpe",
+        "paperboard",
+        "pp"
+      ],
+      "actual_top1_material_id": "hdpe",
+      "actual_top3_material_ids": [
+        "glass",
+        "hdpe",
+        "pp"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Flour typically ships in PP bags or multiwall paper/paperboard bags with a liner."
+    },
+    {
+      "case_id": "lentils_default",
+      "commodity_id": "lentils_dal",
+      "commodity_category": "dry_goods_grains",
+      "conditions": {},
+      "expected_material_ids": [
+        "hdpe",
+        "pet",
+        "pp"
+      ],
+      "actual_top1_material_id": "hdpe",
+      "actual_top3_material_ids": [
+        "glass",
+        "hdpe",
+        "pp"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Dry lentils/dal: PP or HDPE bags are standard, PET for premium jars."
+    },
+    {
+      "case_id": "sugar_default",
+      "commodity_id": "sugar",
+      "commodity_category": "dry_goods_grains",
+      "conditions": {},
+      "expected_material_ids": [
+        "hdpe",
+        "paperboard",
+        "pp"
+      ],
+      "actual_top1_material_id": "hdpe",
+      "actual_top3_material_ids": [
+        "glass",
+        "hdpe",
+        "pp"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Sugar ships in PP bags or paperboard cartons/bags."
+    },
+    {
+      "case_id": "oats_default",
+      "commodity_id": "oats",
+      "commodity_category": "dry_goods_grains",
+      "conditions": {},
+      "expected_material_ids": [
+        "hdpe",
+        "paperboard",
+        "pp"
+      ],
+      "actual_top1_material_id": "hdpe",
+      "actual_top3_material_ids": [
+        "glass",
+        "hdpe",
+        "pp"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Oats are classically sold in a paperboard canister/carton (with a liner) or a PP bag."
+    },
+    {
+      "case_id": "turmeric_default",
+      "commodity_id": "turmeric_powder",
+      "commodity_category": "spices",
+      "conditions": {},
+      "expected_material_ids": [
+        "aluminum_foil_laminate",
+        "metalized_film"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "hdpe",
+        "metalized_film"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Ground spices need a strong light/aroma/O2 barrier \u2014 metalized film or foil laminate pouches are the standard commercial choice."
+    },
+    {
+      "case_id": "pepper_default",
+      "commodity_id": "black_pepper",
+      "commodity_category": "spices",
+      "conditions": {},
+      "expected_material_ids": [
+        "aluminum_foil_laminate",
+        "metalized_film"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "hdpe",
+        "metalized_film"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Ground pepper: metalized film or foil laminate for aroma retention, as with other ground spices."
+    },
+    {
+      "case_id": "chili_default",
+      "commodity_id": "red_chili_powder",
+      "commodity_category": "spices",
+      "conditions": {},
+      "expected_material_ids": [
+        "aluminum_foil_laminate",
+        "metalized_film"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "hdpe",
+        "metalized_film"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Ground chili powder: same aroma/light-barrier reasoning as other ground spices."
+    },
+    {
+      "case_id": "cumin_default",
+      "commodity_id": "cumin_seeds",
+      "commodity_category": "spices",
+      "conditions": {},
+      "expected_material_ids": [
+        "aluminum_foil_laminate",
+        "metalized_film",
+        "pp"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "evoh_film",
+        "metalized_film"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Whole cumin seeds retain aroma longer than ground spice, so a simpler PP pouch is also commercially reasonable alongside the higher-barrier options."
+    },
+    {
+      "case_id": "chicken_default",
+      "commodity_id": "chicken_fresh",
+      "commodity_category": "meat_fish",
+      "conditions": {},
+      "expected_material_ids": [
+        "evoh_film",
+        "metalized_film",
+        "oriented_nylon"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "evoh_film",
+        "metalized_film"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Fresh raw chicken needs a strong O2 barrier (vacuum/MAP laminate) to limit oxidation and spoilage \u2014 nylon/EVOH laminates are the commercial standard."
+    },
+    {
+      "case_id": "mutton_default",
+      "commodity_id": "mutton_fresh",
+      "commodity_category": "meat_fish",
+      "conditions": {},
+      "expected_material_ids": [
+        "evoh_film",
+        "metalized_film",
+        "oriented_nylon"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "evoh_film",
+        "metalized_film"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Fresh raw mutton: same high-O2-barrier vacuum/MAP laminate reasoning as chicken."
+    },
+    {
+      "case_id": "fish_default",
+      "commodity_id": "fish_fresh_whole",
+      "commodity_category": "meat_fish",
+      "conditions": {},
+      "expected_material_ids": [
+        "evoh_film",
+        "ldpe",
+        "oriented_nylon"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "evoh_film",
+        "metalized_film"
+      ],
+      "top1_hit": false,
+      "top3_hit": true,
+      "source_note": "Whole fresh fish: vacuum barrier laminate for extended cold-chain transport, or simple PE wrap for short-term on-ice display."
+    },
+    {
+      "case_id": "shrimp_default",
+      "commodity_id": "shrimp_fresh",
+      "commodity_category": "meat_fish",
+      "conditions": {},
+      "expected_material_ids": [
+        "evoh_film",
+        "oriented_nylon"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "evoh_film",
+        "metalized_film"
+      ],
+      "top1_hit": false,
+      "top3_hit": true,
+      "source_note": "Fresh shrimp is highly perishable and standardly vacuum-packed in a high-barrier laminate."
+    },
+    {
+      "case_id": "bread_default",
+      "commodity_id": "white_bread",
+      "commodity_category": "bakery",
+      "conditions": {},
+      "expected_material_ids": [
+        "ldpe",
+        "pp"
+      ],
+      "actual_top1_material_id": "hdpe",
+      "actual_top3_material_ids": [
+        "hdpe",
+        "pet",
+        "pp"
+      ],
+      "top1_hit": false,
+      "top3_hit": true,
+      "source_note": "Sliced bread bags are classically PP or LDPE."
+    },
+    {
+      "case_id": "biscuits_default",
+      "commodity_id": "biscuits_cookies",
+      "commodity_category": "bakery",
+      "conditions": {},
+      "expected_material_ids": [
+        "metalized_film",
+        "pp"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "hdpe",
+        "metalized_film"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Biscuits/cookies: metalized film for extended-freshness snack packs, or simple PP for shorter shelf-life/local products."
+    },
+    {
+      "case_id": "cake_default",
+      "commodity_id": "cake_frosted",
+      "commodity_category": "bakery",
+      "conditions": {},
+      "expected_material_ids": [
+        "pet"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "evoh_film",
+        "metalized_film"
+      ],
+      "top1_hit": false,
+      "top3_hit": false,
+      "source_note": "Frosted cakes/pastries are near-universally sold in PET clamshell containers."
+    },
+    {
+      "case_id": "milk_long_transport",
+      "commodity_id": "milk_pasteurized",
+      "commodity_category": "dairy",
+      "conditions": {
+        "expected_transport_days": 3
+      },
+      "expected_material_ids": [
+        "glass",
+        "hdpe"
+      ],
+      "actual_top1_material_id": "hdpe",
+      "actual_top3_material_ids": [
+        "hdpe",
+        "metalized_film",
+        "pp"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Same material reasoning as fresh milk regardless of transport duration \u2014 a long transport time should surface a warning (checked separately, not part of the material agreement metric), not change which material is structurally appropriate."
+    },
+    {
+      "case_id": "cheddar_premium_budget",
+      "commodity_id": "cheddar_cheese",
+      "commodity_category": "dairy",
+      "conditions": {
+        "budget_tier": "premium"
+      },
+      "expected_material_ids": [
+        "aluminum_foil_laminate",
+        "evoh_film",
+        "metalized_film",
+        "oriented_nylon"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "evoh_film",
+        "metalized_film"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Updated Day 5: originally expected premium budget tier to make glass viable by de-prioritizing cost alone. That assumption predates the format_practicality scoring dimension (Day 5, Issue 1) \u2014 glass's weight/fragility cost for high-volume retail is a logistics concern independent of price sensitivity, so premium budget alone shouldn't unlock it; glass still wins outright when sustainability is also prioritized (see test_prioritize_sustainability_reranks_toward_more_recyclable_option). Same accepted set as cheddar_default otherwise."
+    },
+    {
+      "case_id": "chicken_economy_budget",
+      "commodity_id": "chicken_fresh",
+      "commodity_category": "meat_fish",
+      "conditions": {
+        "budget_tier": "economy"
+      },
+      "expected_material_ids": [
+        "evoh_film",
+        "metalized_film",
+        "oriented_nylon"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "hdpe",
+        "metalized_film"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Food-safety-driven barrier requirement for raw meat holds regardless of budget tier \u2014 cost tier shouldn't be enough to justify an inadequate O2 barrier for raw chicken."
+    },
+    {
+      "case_id": "banana_hot_climate",
+      "commodity_id": "banana",
+      "commodity_category": "fresh_fruit",
+      "conditions": {
+        "ambient_temperature_c": 36
+      },
+      "expected_material_ids": [
+        "hdpe",
+        "ldpe",
+        "micro_perforated_film",
+        "pp",
+        "vented_pet_clamshell"
+      ],
+      "actual_top1_material_id": "vented_pet_clamshell",
+      "actual_top3_material_ids": [
+        "hdpe",
+        "micro_perforated_film",
+        "vented_pet_clamshell"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "High ambient temperature accelerates ripening/respiration but doesn't change which material family is structurally appropriate \u2014 same expected set as the default case."
+    },
+    {
+      "case_id": "rice_bulk_transport",
+      "commodity_id": "rice",
+      "commodity_category": "dry_goods_grains",
+      "conditions": {
+        "expected_transport_days": 60
+      },
+      "expected_material_ids": [
+        "hdpe",
+        "pet",
+        "pp"
+      ],
+      "actual_top1_material_id": "hdpe",
+      "actual_top3_material_ids": [
+        "glass",
+        "hdpe",
+        "pp"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Rice is dry/shelf-stable for well over a year, so even a long transport window shouldn't require a different material family than the default case."
+    },
+    {
+      "case_id": "fish_fillet_default",
+      "commodity_id": "fish_fillet_fresh",
+      "commodity_category": "meat_fish",
+      "conditions": {},
+      "expected_material_ids": [
+        "evoh_film",
+        "ldpe",
+        "metalized_film",
+        "oriented_nylon"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "evoh_film",
+        "metalized_film"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Fresh fish fillets: same high-O2-barrier vacuum/MAP laminate reasoning as whole fish, or simple PE wrap for short-term on-ice display."
+    },
+    {
+      "case_id": "prawns_default",
+      "commodity_id": "prawns_fresh",
+      "commodity_category": "meat_fish",
+      "conditions": {},
+      "expected_material_ids": [
+        "evoh_film",
+        "metalized_film",
+        "oriented_nylon"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "evoh_film",
+        "metalized_film"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Prawns are packaging-equivalent to shrimp \u2014 highly perishable, standardly vacuum-packed in a high-barrier laminate."
+    },
+    {
+      "case_id": "deli_meat_default",
+      "commodity_id": "processed_deli_meat",
+      "commodity_category": "meat_fish",
+      "conditions": {},
+      "expected_material_ids": [
+        "evoh_film",
+        "metalized_film",
+        "oriented_nylon"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "evoh_film",
+        "metalized_film"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Sliced cured/processed deli meat is commercially vacuum-sealed in a high-O2-barrier laminate, same as raw meat, despite curing giving it somewhat more forgiving spoilage chemistry."
+    },
+    {
+      "case_id": "minced_meat_default",
+      "commodity_id": "minced_meat_fresh",
+      "commodity_category": "meat_fish",
+      "conditions": {},
+      "expected_material_ids": [
+        "evoh_film",
+        "metalized_film",
+        "oriented_nylon"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "evoh_film",
+        "metalized_film"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Ground/minced meat has more exposed surface area than a whole cut, so the same high-O2-barrier vacuum/MAP laminate reasoning as chicken/mutton applies, if anything more strongly."
+    },
+    {
+      "case_id": "dried_fish_default",
+      "commodity_id": "dried_fish",
+      "commodity_category": "meat_fish",
+      "conditions": {},
+      "expected_material_ids": [
+        "aluminum_foil_laminate",
+        "evoh_film",
+        "metalized_film",
+        "pp"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "evoh_film",
+        "metalized_film"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Traditionally-preserved dried/salted fish is commonly sold in a barrier laminate pouch for export-grade product, or a simple PP bag for local/traditional-market product. compostable/biodegradable film is not standard real-world practice for this product and is deliberately NOT included here, even if the rules engine's own barrier-property math happens to favor it \u2014 see the honesty note at the top of this file about disagreements being a prompt to investigate, not evidence the reference case is right."
+    },
+    {
+      "case_id": "coriander_default",
+      "commodity_id": "coriander_powder",
+      "commodity_category": "spices",
+      "conditions": {},
+      "expected_material_ids": [
+        "aluminum_foil_laminate",
+        "metalized_film"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "evoh_film",
+        "metalized_film"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Ground coriander: same aroma/light-barrier reasoning as other ground spices (turmeric/pepper/chili)."
+    },
+    {
+      "case_id": "cardamom_default",
+      "commodity_id": "cardamom_green",
+      "commodity_category": "spices",
+      "conditions": {},
+      "expected_material_ids": [
+        "aluminum_foil_laminate",
+        "metalized_film",
+        "pp"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "hdpe",
+        "metalized_film"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Whole cardamom pods retain aroma longer than ground spice, so a simpler PP pouch is also commercially reasonable alongside the higher-barrier options, same as whole cumin seeds."
+    },
+    {
+      "case_id": "cloves_default",
+      "commodity_id": "cloves",
+      "commodity_category": "spices",
+      "conditions": {},
+      "expected_material_ids": [
+        "aluminum_foil_laminate",
+        "metalized_film",
+        "pp"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "hdpe",
+        "metalized_film"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Whole cloves: same whole-spice reasoning as cardamom/cumin \u2014 high oil content gives good aroma retention even in a simpler pouch, though a barrier laminate is still the premium commercial norm."
+    },
+    {
+      "case_id": "mustard_seeds_default",
+      "commodity_id": "mustard_seeds",
+      "commodity_category": "spices",
+      "conditions": {},
+      "expected_material_ids": [
+        "aluminum_foil_laminate",
+        "metalized_film",
+        "pp"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "evoh_film",
+        "metalized_film"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Whole mustard seeds: notably high oil content (~30%) for a whole spice, so a barrier pouch is preferred, though a simpler PP pouch is a real commercial option for whole seeds same as cumin/cardamom/cloves."
+    },
+    {
+      "case_id": "paneer_default",
+      "commodity_id": "paneer",
+      "commodity_category": "dairy",
+      "conditions": {},
+      "expected_material_ids": [
+        "evoh_film",
+        "ldpe",
+        "metalized_film",
+        "oriented_nylon"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "evoh_film",
+        "metalized_film"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Fresh unripened cheese: commercial paneer is typically vacuum-packed in a barrier pouch, or sold in a simple poly (LDPE) pouch with brine for loose/local retail."
+    },
+    {
+      "case_id": "quinoa_default",
+      "commodity_id": "quinoa",
+      "commodity_category": "dry_goods_grains",
+      "conditions": {},
+      "expected_material_ids": [
+        "hdpe",
+        "paperboard",
+        "pet",
+        "pp"
+      ],
+      "actual_top1_material_id": "hdpe",
+      "actual_top3_material_ids": [
+        "glass",
+        "hdpe",
+        "pp"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Dry grain, packaged like rice/oats: PP or HDPE bags are standard, paperboard canister for premium retail given quinoa's oats-like higher fat content."
+    },
+    {
+      "case_id": "almonds_default",
+      "commodity_id": "almonds",
+      "commodity_category": "nuts_dried_fruits",
+      "conditions": {},
+      "expected_material_ids": [
+        "aluminum_foil_laminate",
+        "metalized_film",
+        "pp"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "evoh_film",
+        "metalized_film"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Shelled nuts: metalized film or foil laminate pouches for extended-freshness retail (high fat content makes rancidity the main risk), or simple PP bags for bulk/local sale."
+    },
+    {
+      "case_id": "fruit_juice_default",
+      "commodity_id": "fruit_juice_bottled",
+      "commodity_category": "beverages",
+      "conditions": {},
+      "expected_material_ids": [
+        "glass",
+        "hdpe",
+        "pet"
+      ],
+      "actual_top1_material_id": "hdpe",
+      "actual_top3_material_ids": [
+        "hdpe",
+        "metalized_film",
+        "pp"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Bottled fruit juice: PET or glass bottles are the classic retail format, HDPE for some juice jugs."
+    },
+    {
+      "case_id": "frozen_peas_default",
+      "commodity_id": "frozen_peas",
+      "commodity_category": "frozen_foods",
+      "conditions": {},
+      "expected_material_ids": [
+        "hdpe",
+        "ldpe",
+        "pp"
+      ],
+      "actual_top1_material_id": "hdpe",
+      "actual_top3_material_ids": [
+        "hdpe",
+        "metalized_film",
+        "pp"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Frozen vegetables are near-universally sold in simple PE bags at retail."
+    },
+    {
+      "case_id": "potato_chips_default",
+      "commodity_id": "potato_chips",
+      "commodity_category": "ready_to_eat_snacks",
+      "conditions": {},
+      "expected_material_ids": [
+        "aluminum_foil_laminate",
+        "metalized_film"
+      ],
+      "actual_top1_material_id": "metalized_film",
+      "actual_top3_material_ids": [
+        "aluminum_foil_laminate",
+        "evoh_film",
+        "metalized_film"
+      ],
+      "top1_hit": true,
+      "top3_hit": true,
+      "source_note": "Potato chips are almost universally sold in metalized film bags (light/O2/moisture barrier for a high-fat, high-surface-area fried snack); foil laminate is a real premium alternative."
+    }
+  ]
+}

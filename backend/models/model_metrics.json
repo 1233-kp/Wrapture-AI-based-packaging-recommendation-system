@@ -1,0 +1,330 @@
+{
+  "dataset": {
+    "n_rows": 20800,
+    "n_commodity_groups": 80,
+    "n_features": 31,
+    "provenance": "Synthetic \u2014 30 real commodities as anchors, perturbed property variations labeled by the rules engine's own _score_material(). See training/generate_training_data.py and training/README.md."
+  },
+  "model": {
+    "type": "RandomForestRegressor",
+    "params": {
+      "bootstrap": true,
+      "ccp_alpha": 0.0,
+      "criterion": "squared_error",
+      "max_depth": 12,
+      "max_features": 1.0,
+      "max_leaf_nodes": null,
+      "max_samples": null,
+      "min_impurity_decrease": 0.0,
+      "min_samples_leaf": 4,
+      "min_samples_split": 2,
+      "min_weight_fraction_leaf": 0.0,
+      "monotonic_cst": null,
+      "n_estimators": 300,
+      "n_jobs": -1,
+      "oob_score": false,
+      "random_state": 42,
+      "verbose": 0,
+      "warm_start": false
+    }
+  },
+  "group_kfold_cv": {
+    "n_folds": 5,
+    "grouped_by": "base_commodity_id",
+    "per_fold": [
+      {
+        "fold": 0,
+        "n_train": 16640,
+        "n_test": 4160,
+        "n_test_groups": 16,
+        "r2": 0.9501,
+        "mae": 1.6617
+      },
+      {
+        "fold": 1,
+        "n_train": 16640,
+        "n_test": 4160,
+        "n_test_groups": 16,
+        "r2": 0.9659,
+        "mae": 1.0739
+      },
+      {
+        "fold": 2,
+        "n_train": 16640,
+        "n_test": 4160,
+        "n_test_groups": 16,
+        "r2": 0.9734,
+        "mae": 0.9869
+      },
+      {
+        "fold": 3,
+        "n_train": 16640,
+        "n_test": 4160,
+        "n_test_groups": 16,
+        "r2": 0.9782,
+        "mae": 0.9344
+      },
+      {
+        "fold": 4,
+        "n_train": 16640,
+        "n_test": 4160,
+        "n_test_groups": 16,
+        "r2": 0.9715,
+        "mae": 1.0148
+      }
+    ],
+    "avg_r2": 0.9678,
+    "avg_mae": 1.1343
+  },
+  "reference_set_agreement": {
+    "total_cases": 50,
+    "top1_agreement_pct": 84.0,
+    "top3_agreement_pct": 98.0,
+    "mismatches": [
+      {
+        "case_id": "chicken_default",
+        "commodity_id": "chicken_fresh",
+        "expected": [
+          "evoh_film",
+          "metalized_film",
+          "oriented_nylon"
+        ],
+        "ml_top1": "aluminum_foil_laminate",
+        "ml_top3": [
+          "aluminum_foil_laminate",
+          "evoh_film",
+          "metalized_film"
+        ]
+      },
+      {
+        "case_id": "fish_default",
+        "commodity_id": "fish_fresh_whole",
+        "expected": [
+          "evoh_film",
+          "ldpe",
+          "oriented_nylon"
+        ],
+        "ml_top1": "aluminum_foil_laminate",
+        "ml_top3": [
+          "aluminum_foil_laminate",
+          "evoh_film",
+          "metalized_film"
+        ]
+      },
+      {
+        "case_id": "shrimp_default",
+        "commodity_id": "shrimp_fresh",
+        "expected": [
+          "evoh_film",
+          "oriented_nylon"
+        ],
+        "ml_top1": "aluminum_foil_laminate",
+        "ml_top3": [
+          "aluminum_foil_laminate",
+          "evoh_film",
+          "metalized_film"
+        ]
+      },
+      {
+        "case_id": "bread_default",
+        "commodity_id": "white_bread",
+        "expected": [
+          "ldpe",
+          "pp"
+        ],
+        "ml_top1": "hdpe",
+        "ml_top3": [
+          "hdpe",
+          "pet",
+          "pp"
+        ]
+      },
+      {
+        "case_id": "cake_default",
+        "commodity_id": "cake_frosted",
+        "expected": [
+          "pet"
+        ],
+        "ml_top1": "aluminum_foil_laminate",
+        "ml_top3": [
+          "aluminum_foil_laminate",
+          "evoh_film",
+          "metalized_film"
+        ]
+      },
+      {
+        "case_id": "fish_fillet_default",
+        "commodity_id": "fish_fillet_fresh",
+        "expected": [
+          "evoh_film",
+          "ldpe",
+          "metalized_film",
+          "oriented_nylon"
+        ],
+        "ml_top1": "aluminum_foil_laminate",
+        "ml_top3": [
+          "aluminum_foil_laminate",
+          "evoh_film",
+          "metalized_film"
+        ]
+      },
+      {
+        "case_id": "prawns_default",
+        "commodity_id": "prawns_fresh",
+        "expected": [
+          "evoh_film",
+          "metalized_film",
+          "oriented_nylon"
+        ],
+        "ml_top1": "aluminum_foil_laminate",
+        "ml_top3": [
+          "aluminum_foil_laminate",
+          "evoh_film",
+          "metalized_film"
+        ]
+      },
+      {
+        "case_id": "minced_meat_default",
+        "commodity_id": "minced_meat_fresh",
+        "expected": [
+          "evoh_film",
+          "metalized_film",
+          "oriented_nylon"
+        ],
+        "ml_top1": "aluminum_foil_laminate",
+        "ml_top3": [
+          "aluminum_foil_laminate",
+          "evoh_film",
+          "metalized_film"
+        ]
+      }
+    ],
+    "caveat": "This measures agreement between the ML model's predictions and the same hand-curated, food-science-grounded reference set used to evaluate the rules engine (see evaluation/run_evaluation.py) \u2014 NOT independent lab validation. Both the rules engine and this model's training labels ultimately trace back to the same encoded heuristics; a high score here means the model learned a faithful approximation of those heuristics, not that the heuristics themselves are scientifically proven."
+  },
+  "feature_importances": [
+    {
+      "feature": "material_wvtr",
+      "importance": 0.2537
+    },
+    {
+      "feature": "commodity_respiration_ord",
+      "importance": 0.2271
+    },
+    {
+      "feature": "material_otr",
+      "importance": 0.1118
+    },
+    {
+      "feature": "material_category_flexible_film_or_rigid",
+      "importance": 0.108
+    },
+    {
+      "feature": "commodity_fat_pct",
+      "importance": 0.0502
+    },
+    {
+      "feature": "commodity_moisture_pct",
+      "importance": 0.0458
+    },
+    {
+      "feature": "material_thickness",
+      "importance": 0.0356
+    },
+    {
+      "feature": "commodity_ph",
+      "importance": 0.0252
+    },
+    {
+      "feature": "commodity_category_meat_fish",
+      "importance": 0.0169
+    },
+    {
+      "feature": "budget_tier_ord",
+      "importance": 0.0134
+    },
+    {
+      "feature": "material_cost_ord",
+      "importance": 0.0122
+    },
+    {
+      "feature": "material_sustainability_pts",
+      "importance": 0.0119
+    },
+    {
+      "feature": "material_category_flexible_film_laminate",
+      "importance": 0.0116
+    },
+    {
+      "feature": "prioritize_sustainability",
+      "importance": 0.0115
+    },
+    {
+      "feature": "commodity_category_spices",
+      "importance": 0.0106
+    },
+    {
+      "feature": "material_category_rigid_paper",
+      "importance": 0.0106
+    },
+    {
+      "feature": "material_practicality_pts",
+      "importance": 0.0081
+    },
+    {
+      "feature": "commodity_category_dry_goods_grains",
+      "importance": 0.008
+    },
+    {
+      "feature": "material_category_rigid",
+      "importance": 0.0071
+    },
+    {
+      "feature": "commodity_category_bakery",
+      "importance": 0.0039
+    },
+    {
+      "feature": "material_breathable",
+      "importance": 0.003
+    },
+    {
+      "feature": "commodity_category_frozen_foods",
+      "importance": 0.0025
+    },
+    {
+      "feature": "material_category_flexible_film",
+      "importance": 0.0024
+    },
+    {
+      "feature": "commodity_category_dairy",
+      "importance": 0.0022
+    },
+    {
+      "feature": "commodity_shelf_life_days",
+      "importance": 0.0022
+    },
+    {
+      "feature": "commodity_category_beverages",
+      "importance": 0.002
+    },
+    {
+      "feature": "commodity_category_nuts_dried_fruits",
+      "importance": 0.0011
+    },
+    {
+      "feature": "material_category_rigid_or_film",
+      "importance": 0.001
+    },
+    {
+      "feature": "commodity_category_fresh_fruit",
+      "importance": 0.0004
+    },
+    {
+      "feature": "commodity_category_ready_to_eat_snacks",
+      "importance": 0.0001
+    },
+    {
+      "feature": "commodity_category_fresh_vegetable",
+      "importance": 0.0
+    }
+  ]
+}

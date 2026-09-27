@@ -1,0 +1,119 @@
+{
+  "_meta": {
+    "description": "Hand-written FAQ content for the public FAQ page and the FAQ-matching assistant (engine/faq_matcher.py). Every answer is checked against what's actually implemented elsewhere in this project — no marketing claims, no promises about things that aren't built."
+  },
+  "faqs": [
+    {
+      "id": "commodities-supported",
+      "question": "What commodities and food products does Wrapture support?",
+      "question_hi": "Wrapture किन उत्पादों और खाद्य पदार्थों को सपोर्ट करता है?",
+      "answer": "The dataset covers 80 commodities across 11 categories — fresh fruit and vegetables, dairy, meat and fish, bakery, beverages, dry goods and grains, frozen foods, nuts and dried fruits, ready-to-eat snacks, and spices. If your commodity isn't in the dropdown, you can describe it in free text and the app will semantically match it to the closest existing commodity.",
+      "answer_hi": "डेटासेट में 11 श्रेणियों में 80 उत्पाद शामिल हैं — ताज़े फल और सब्ज़ियां, डेयरी, मांस और मछली, बेकरी, पेय पदार्थ, सूखा सामान और अनाज, जमे हुए खाद्य, मेवे और सूखे मेवे, रेडी-टू-ईट स्नैक्स, और मसाले। अगर आपका उत्पाद ड्रॉपडाउन में नहीं है, तो आप उसे सामान्य भाषा में लिख सकते हैं और ऐप उसे निकटतम मौजूदा उत्पाद से मिलाएगा।"
+    },
+    {
+      "id": "materials-supported",
+      "question": "What packaging materials does Wrapture support?",
+      "question_hi": "Wrapture किन पैकेजिंग सामग्रियों को सपोर्ट करता है?",
+      "answer": "The database covers 13 packaging materials — including LDPE, HDPE, PET, aluminum foil laminate, and biodegradable/PLA film — each with real barrier properties (OTR/WVTR), cost tier, and recyclability rating, the same data used in scoring. You can browse all of them on the Packaging Library page, no account needed.",
+      "answer_hi": "डेटाबेस में 13 पैकेजिंग सामग्रियां शामिल हैं — जिनमें LDPE, HDPE, PET, एल्युमिनियम फॉयल लैमिनेट, और बायोडिग्रेडेबल/PLA फिल्म शामिल हैं — हर एक की असली बैरियर गुण (OTR/WVTR), लागत स्तर, और पुनर्चक्रण रेटिंग के साथ, वही डेटा जो स्कोरिंग में उपयोग होता है। आप इन सभी को पैकेजिंग लाइब्रेरी पेज पर देख सकते हैं, किसी खाते की ज़रूरत नहीं।"
+    },
+    {
+      "id": "how-recommendation-works",
+      "question": "How does the packaging recommendation actually work?",
+      "question_hi": "पैकेजिंग सिफ़ारिश वास्तव में कैसे काम करती है?",
+      "answer": "It's a rules-based scoring engine, not a black box. Every packaging material is scored across 8 weighted dimensions — category fit, cost, format practicality, moisture barrier, oxygen barrier, respiration compatibility, a respiration-packaging boost, and sustainability — using your commodity's real moisture, oxygen, and respiration properties. The material with the highest overall score is ranked first, and every score comes with a plain-language breakdown of why.",
+      "answer_hi": "यह एक नियम-आधारित स्कोरिंग इंजन है, कोई ब्लैक-बॉक्स नहीं। हर पैकेजिंग सामग्री को 8 भारित पहलुओं पर स्कोर किया जाता है — श्रेणी फिट, लागत, फॉर्मेट व्यावहारिकता, नमी बैरियर, ऑक्सीजन बैरियर, श्वसन अनुकूलता, श्वसन-पैकेजिंग बूस्ट, और स्थिरता — आपके उत्पाद के असली नमी, ऑक्सीजन और श्वसन गुणों का उपयोग करते हुए। सबसे ऊंचे स्कोर वाली सामग्री सबसे ऊपर रखी जाती है, और हर स्कोर के साथ सरल भाषा में कारण भी दिया जाता है।"
+    },
+    {
+      "id": "ml-cross-check",
+      "question": "What does the ML cross-check or ML agreement mean?",
+      "question_hi": "\"ML क्रॉस-चेक\" या ML सहमति का क्या मतलब है?",
+      "answer": "Alongside the rules-based score, a separately-trained ranking model looks at the same shortlisted options and flags whether its own top pick agrees with the rules engine's #1. It's a corroborating second signal, not an independent recommendation of its own, and it isn't shown when no model is loaded.",
+      "answer_hi": "नियम-आधारित स्कोर के साथ-साथ, एक अलग से प्रशिक्षित रैंकिंग मॉडल उन्हीं शॉर्टलिस्ट किए गए विकल्पों को देखता है और बताता है कि क्या उसकी खुद की टॉप पसंद नियम इंजन की #1 पसंद से मेल खाती है। यह एक पुष्टिकारी दूसरा संकेत है, अपने आप में एक स्वतंत्र सिफ़ारिश नहीं, और जब कोई मॉडल लोड न हो तो यह दिखाया भी नहीं जाता।"
+    },
+    {
+      "id": "confidence-levels",
+      "question": "What do the low, medium, and high confidence labels mean?",
+      "question_hi": "\"कम / मध्यम / उच्च विश्वास\" लेबल का क्या मतलब है?",
+      "answer": "They describe how reliable the underlying reference data is for that specific commodity or material — not how correct the recommendation is. High confidence means the value is well-established in food-science literature with low variability; low confidence means it's a rough estimate with limited reference data. A recommendation built on low-confidence input is flagged so you know to double-check it independently.",
+      "answer_hi": "ये बताते हैं कि किसी विशेष उत्पाद या सामग्री का अंतर्निहित संदर्भ डेटा कितना भरोसेमंद है — न कि सिफ़ारिश कितनी सही है। उच्च विश्वास का मतलब है कि मान खाद्य-विज्ञान साहित्य में अच्छी तरह स्थापित है और कम बदलाव वाला है; कम विश्वास का मतलब है कि यह एक मोटा अनुमान है जिसमें सीमित संदर्भ डेटा है। कम-विश्वास वाले इनपुट पर बनी सिफ़ारिश को फ़्लैग किया जाता है ताकि आप उसे स्वतंत्र रूप से जांच सकें।"
+    },
+    {
+      "id": "shelf-life-prediction",
+      "question": "How is the predicted shelf life calculated, and how reliable is it?",
+      "question_hi": "अनुमानित शेल्फ लाइफ की गणना कैसे होती है, और यह कितनी भरोसेमंद है?",
+      "answer": "When you provide an ambient storage temperature, Wrapture adjusts the commodity's typical shelf life using Q10 temperature-coefficient kinetics — a standard food-science approximation for how spoilage rate changes with temperature. It's a literature-based estimate, not a lab-validated or certified shelf-life claim, and its confidence level is always medium since it uses category-level Q10 values rather than kinetics measured for that specific commodity.",
+      "answer_hi": "जब आप एक परिवेश भंडारण तापमान देते हैं, तो Wrapture उत्पाद की सामान्य शेल्फ लाइफ को Q10 तापमान-गुणांक कैनेटिक्स का उपयोग करके समायोजित करता है — तापमान के साथ खराब होने की दर कैसे बदलती है, इसका एक मानक खाद्य-विज्ञान अनुमान। यह साहित्य-आधारित अनुमान है, कोई लैब-सत्यापित या प्रमाणित शेल्फ-लाइफ दावा नहीं, और इसका विश्वास स्तर हमेशा \"मध्यम\" रहता है क्योंकि यह उस विशेष उत्पाद के लिए मापी गई कैनेटिक्स के बजाय श्रेणी-स्तरीय Q10 मानों का उपयोग करता है।"
+    },
+    {
+      "id": "compliance-flags",
+      "question": "What are the compliance flags, and are they legal advice?",
+      "question_hi": "अनुपालन फ़्लैग क्या हैं, और क्या वे कानूनी सलाह हैं?",
+      "answer": "No — they're informational only, not legal advice. A small, hand-curated set of 10 commonly-cited Indian food-packaging regulatory considerations (FSSAI labelling and food-contact rules, BIS standards, Plastic Waste Management/EPR rules, Legal Metrology) are checked against your specific commodity and material, and shown as flags worth independently verifying. Each one names a general regulatory area, never a specific clause or section number we aren't confident is current — a wrong specific citation would be worse than a general one.",
+      "answer_hi": "नहीं — ये केवल सूचनात्मक हैं, कानूनी सलाह नहीं। भारतीय खाद्य-पैकेजिंग नियामक बातों (FSSAI लेबलिंग और फ़ूड-कॉन्टैक्ट नियम, BIS मानक, प्लास्टिक वेस्ट मैनेजमेंट/EPR नियम, लीगल मेट्रोलॉजी) से जुड़े 10 सामान्यतः उद्धृत, हाथ से चुने गए मामलों को आपके विशेष उत्पाद और सामग्री के विरुद्ध जांचा जाता है, और स्वतंत्र रूप से सत्यापित करने योग्य फ़्लैग के रूप में दिखाया जाता है। हर एक एक सामान्य नियामक क्षेत्र बताता है, कभी कोई विशेष धारा या अनुभाग संख्या नहीं जिसके सही और मौजूदा होने का हमें यकीन न हो — एक गलत विशेष उद्धरण एक सामान्य उद्धरण से बदतर होता।"
+    },
+    {
+      "id": "qr-verification",
+      "question": "What does scanning a report's QR code actually verify?",
+      "question_hi": "रिपोर्ट का QR कोड स्कैन करने से वास्तव में क्या सत्यापित होता है?",
+      "answer": "Scanning the QR code — or opening its verification link — opens a public page that looks up the report by its id and shows its key specs: commodity, material, barrier properties, sustainability score, and when it was generated. It confirms the report exists and matches what's on record; it's a traceability lookup, not a cryptographically signed authenticity certificate. No Wrapture account is needed to view it, and it never shows who generated the report.",
+      "answer_hi": "QR कोड स्कैन करने — या उसका सत्यापन लिंक खोलने — से एक सार्वजनिक पेज खुलता है जो रिपोर्ट को उसकी id से खोजकर उसकी मुख्य जानकारी दिखाता है: उत्पाद, सामग्री, बैरियर गुण, स्थिरता स्कोर, और यह कब बनाई गई। यह पुष्टि करता है कि रिपोर्ट मौजूद है और रिकॉर्ड से मेल खाती है; यह एक ट्रेसेबिलिटी लुकअप है, कोई क्रिप्टोग्राफ़िक रूप से हस्ताक्षरित प्रामाणिकता प्रमाणपत्र नहीं। इसे देखने के लिए किसी Wrapture खाते की ज़रूरत नहीं, और यह कभी नहीं दिखाता कि रिपोर्ट किसने बनाई।"
+    },
+    {
+      "id": "hindi-support",
+      "question": "Is the app fully usable in Hindi?",
+      "question_hi": "क्या ऐप हिंदी में पूरी तरह उपयोग किया जा सकता है?",
+      "answer": "The interface, all AI-generated explanations, rationale, and warnings are available in Hindi as well as English, and commodities/materials show Hindi display names where set. A handful of underlying technical identifiers (like material or commodity ids) stay in English regardless of language, since they're internal keys, not user-facing labels. No other languages are supported yet.",
+      "answer_hi": "इंटरफ़ेस, सभी AI-जनित स्पष्टीकरण, तर्क और चेतावनियां अंग्रेज़ी के साथ-साथ हिंदी में भी उपलब्ध हैं, और जहां सेट किया गया है वहां उत्पाद/सामग्री हिंदी डिस्प्ले नाम दिखाते हैं। कुछ अंतर्निहित तकनीकी पहचानकर्ता (जैसे सामग्री या उत्पाद id) भाषा चाहे जो भी हो, अंग्रेज़ी में ही रहते हैं, क्योंकि वे आंतरिक कुंजियां हैं, उपयोगकर्ता के देखने के लिए लेबल नहीं। अभी कोई अन्य भाषा उपलब्ध नहीं है।"
+    },
+    {
+      "id": "free-and-open",
+      "question": "Is Wrapture free to use?",
+      "question_hi": "क्या Wrapture का उपयोग मुफ़्त है?",
+      "answer": "Yes. This is a project built for Smart India Hackathon problem statement SIH PS 26236, not a commercial product — there's no paid tier anywhere in the app. Signing in (via Google or GitHub) is only used to save your recommendation history; the recommendation and packaging-library pages don't require an account at all.",
+      "answer_hi": "हां। यह Smart India Hackathon समस्या विवरण SIH PS 26236 के लिए बनाया गया एक प्रोजेक्ट है, कोई व्यावसायिक उत्पाद नहीं — ऐप में कहीं भी कोई भुगतान वाला स्तर नहीं है। साइन इन (Google या GitHub से) केवल आपकी सिफ़ारिश का इतिहास सहेजने के लिए उपयोग होता है; सिफ़ारिश और पैकेजिंग-लाइब्रेरी पेजों के लिए किसी खाते की ज़रूरत ही नहीं।"
+    },
+    {
+      "id": "accuracy",
+      "question": "How accurate is Wrapture, and how reliable are its predictions?",
+      "question_hi": "Wrapture कितना सटीक है, और इसके अनुमान कितने भरोसेमंद हैं?",
+      "answer": "Be upfront: no physical or lab validation has been performed on any recommendation — everything is based on published food-science and packaging literature and general engineering consensus, not our own trials. Treat every output, especially anything flagged low- or medium-confidence, as a well-reasoned starting point for your own testing and verification, not a certified result.",
+      "answer_hi": "स्पष्ट रहें: किसी भी सिफ़ारिश पर कोई भौतिक या प्रयोगशाला परीक्षण नहीं किया गया है — सब कुछ प्रकाशित खाद्य-विज्ञान और पैकेजिंग साहित्य तथा सामान्य इंजीनियरिंग सहमति पर आधारित है, हमारे अपने परीक्षणों पर नहीं। हर परिणाम को, खासकर जिसे कम- या मध्यम-विश्वास के रूप में फ़्लैग किया गया हो, अपने खुद के परीक्षण और सत्यापन के लिए एक सुविचारित शुरुआती बिंदु मानें, कोई प्रमाणित परिणाम नहीं।"
+    },
+    {
+      "id": "sustainability-score",
+      "question": "How is the sustainability score calculated?",
+      "question_hi": "स्थिरता स्कोर की गणना कैसे होती है?",
+      "answer": "Each material's 0-100 sustainability score comes from its recyclability and compostability rating — materials that are widely recyclable curbside or industrially compostable score highest, and multi-material laminates that are hard to separate score lowest. It's a proxy indicator, not a formal Life Cycle Assessment (LCA); if you prioritize sustainability on a request, this score is weighted more heavily in the ranking.",
+      "answer_hi": "हर सामग्री का 0-100 स्थिरता स्कोर उसकी पुनर्चक्रण और खाद-योग्यता रेटिंग से आता है — जो सामग्री आम कर्बसाइड पर व्यापक रूप से पुनर्चक्रण योग्य या औद्योगिक रूप से खाद-योग्य है वह सबसे ऊंचा स्कोर पाती है, और अलग करना मुश्किल बहु-परत लैमिनेट सबसे कम। यह एक प्रॉक्सी संकेतक है, औपचारिक लाइफ साइकिल असेसमेंट (LCA) नहीं; यदि आप किसी अनुरोध में स्थिरता को प्राथमिकता देते हैं, तो यह स्कोर रैंकिंग में अधिक भारी रूप से तौला जाता है।"
+    },
+    {
+      "id": "map-gas-guidance",
+      "question": "What are the MAP Modified Atmosphere Packaging gas suggestions?",
+      "question_hi": "MAP (मॉडिफाइड एटमॉस्फियर पैकेजिंग) गैस सुझाव क्या हैं?",
+      "answer": "For fresh produce with a known respiration rate, the app suggests general O2/CO2/N2 percentage ranges as a starting point for Modified Atmosphere Packaging. This is general guidance drawn from respiration-rate class, not a lab-validated gas mix for your specific product and packaging format.",
+      "answer_hi": "ज्ञात श्वसन दर वाले ताज़े उत्पादों के लिए, ऐप मॉडिफाइड एटमॉस्फियर पैकेजिंग हेतु एक शुरुआती बिंदु के रूप में सामान्य O2/CO2/N2 प्रतिशत सीमाएं सुझाता है। यह श्वसन-दर श्रेणी से लिया गया सामान्य मार्गदर्शन है, आपके विशेष उत्पाद और पैकेजिंग फॉर्मेट के लिए कोई लैब-सत्यापित गैस मिश्रण नहीं।"
+    },
+    {
+      "id": "commodity-not-listed",
+      "question": "I can't find my specific food item in the dropdown — how do I add or match it?",
+      "question_hi": "मुझे अपना विशेष खाद्य पदार्थ ड्रॉपडाउन में नहीं मिल रहा — मैं उसे कैसे जोड़ूं या मिलाऊं?",
+      "answer": "Type a free-text description (for example, 'a soft ripe stone fruit like a peach') into the commodity-match search. It uses the same local sentence-embedding model as this FAQ assistant to find the closest existing commodity and borrow its properties, and shows you how confident that match is before you use it.",
+      "answer_hi": "उत्पाद-मिलान खोज में एक सामान्य भाषा में विवरण टाइप करें (जैसे \"एक नरम पका हुआ स्टोन फ्रूट जैसे आड़ू\")। यह इस FAQ सहायक जैसे ही स्थानीय सेंटेंस-एम्बेडिंग मॉडल का उपयोग करके निकटतम मौजूदा उत्पाद ढूंढता है और उसके गुण उधार लेता है — उपयोग करने से पहले आपको यह भी दिखता है कि यह मिलान कितना विश्वसनीय है।"
+    },
+    {
+      "id": "pdf-export",
+      "question": "Can I download or export a recommendation?",
+      "question_hi": "क्या मैं कोई सिफ़ारिश डाउनलोड या एक्सपोर्ट कर सकता हूं?",
+      "answer": "Yes — any saved report can be exported as a PDF from your report history, including its scoring breakdown and QR verification code, ready to share or print.",
+      "answer_hi": "हां — आपके रिपोर्ट इतिहास से किसी भी सहेजी गई रिपोर्ट को PDF के रूप में एक्सपोर्ट किया जा सकता है, जिसमें उसका स्कोरिंग विवरण और QR सत्यापन कोड शामिल है, साझा करने या प्रिंट करने के लिए तैयार।"
+    },
+    {
+      "id": "data-privacy",
+      "question": "Who can see my saved reports?",
+      "question_hi": "मेरी सहेजी गई रिपोर्ट कौन देख सकता है?",
+      "answer": "Only you — your report list and history are scoped to your account by database-level row security, so no other signed-in user can see them. The one exception is deliberate: the public verification page reachable via a report's QR code or link is viewable by anyone who has that specific link (for example, a supply-chain partner scanning a printed report), but it never reveals your account, email, or identity — just the recommendation's specs.",
+      "answer_hi": "सिर्फ़ आप — आपकी रिपोर्ट सूची और इतिहास डेटाबेस-स्तरीय रो सिक्योरिटी द्वारा आपके खाते तक सीमित है, इसलिए कोई अन्य साइन-इन उपयोगकर्ता उन्हें नहीं देख सकता। एक अपवाद जानबूझकर है: किसी रिपोर्ट के QR कोड या लिंक से पहुंचा जाने वाला सार्वजनिक सत्यापन पेज किसी भी ऐसे व्यक्ति को दिखता है जिसके पास वह विशेष लिंक है (जैसे कोई सप्लाई-चेन पार्टनर प्रिंट की गई रिपोर्ट स्कैन कर रहा हो), लेकिन यह कभी आपका खाता, ईमेल या पहचान नहीं दिखाता — बस सिफ़ारिश की जानकारी।"
+    }
+  ]
+}

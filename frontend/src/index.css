@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Nunito+Sans:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/*
+  Design tokens for Wrapture.
+  Source: ui-ux-pro-max skill design-system search ("grocery food sustainability
+  packaging analytics tool"), matched against the "Grocery & Shopping List" palette
+  (fresh green + food amber) — the closest catalogued match for a food/sustainability
+  product. Blended with a teal secondary (from the EV/eco-ecosystem palette match) per
+  explicit brief ("soft greens/teals with warm accent"). The tool's "Flat Design" style
+  match (no shadows) was intentionally overridden with soft-shadow rounded cards, since
+  the brief explicitly asked for that — see conversation notes.
+*/
+@theme {
+  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-body: "Nunito Sans", system-ui, sans-serif;
+
+  /* -- brand: green (primary) -- */
+  --color-brand-50: #ecfdf5;
+  --color-brand-100: #d1fae5;
+  --color-brand-200: #a7f3d0;
+  --color-brand-300: #6ee7b7;
+  --color-brand-400: #34d399;
+  --color-brand-500: #10b981;
+  --color-brand-600: #059669;
+  --color-brand-700: #047857;
+  --color-brand-800: #065f46;
+  --color-brand-900: #064e3b;
+
+  /* -- teal: secondary / interactive / info -- */
+  --color-teal-50: #ecfeff;
+  --color-teal-100: #cffafe;
+  --color-teal-200: #a5f3fc;
+  --color-teal-300: #67e8f9;
+  --color-teal-400: #22d3ee;
+  --color-teal-500: #06b6d4;
+  --color-teal-600: #0891b2;
+  --color-teal-700: #0e7490;
+  --color-teal-800: #155e75;
+  --color-teal-900: #164e63;
+
+  /* -- amber: warm accent / CTA -- */
+  --color-amber-50: #fffbeb;
+  --color-amber-100: #fef3c7;
+  --color-amber-200: #fde68a;
+  --color-amber-300: #fcd34d;
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+  --color-amber-600: #d97706;
+  --color-amber-700: #b45309;
+  --color-amber-800: #92400e;
+
+  /* -- neutrals -- */
+  --color-ink-50: #f8faf9;
+  --color-ink-100: #f0f8f6;
+  --color-ink-200: #e1f2ed;
+  --color-ink-300: #cbd5e1;
+  --color-ink-400: #94a3b8;
+  --color-ink-500: #64748b;
+  --color-ink-600: #475569;
+  --color-ink-700: #334155;
+  --color-ink-800: #1e293b;
+  --color-ink-900: #0f172a;
+
+  /* -- semantic -- */
+  --color-success: #059669;
+  --color-warning: #d97706;
+  --color-danger: #dc2626;
+  --color-danger-bg: #fef2f2;
+  --color-info: #0891b2;
+
+  /* -- shadows: soft, warm-tinted (not pure black) -- */
+  --shadow-soft-sm: 0 1px 2px 0 rgb(15 23 42 / 0.04), 0 1px 3px 0 rgb(15 23 42 / 0.03);
+  --shadow-soft-md: 0 4px 12px -2px rgb(6 95 70 / 0.08), 0 2px 6px -2px rgb(6 95 70 / 0.05);
+  --shadow-soft-lg: 0 12px 32px -8px rgb(6 95 70 / 0.14), 0 4px 12px -4px rgb(6 95 70 / 0.08);
+  --shadow-soft-xl: 0 24px 60px -12px rgb(6 95 70 / 0.18), 0 8px 20px -6px rgb(6 95 70 / 0.1);
+
+  --radius-card: 1.25rem;
+  --radius-pill: 999px;
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 2.2s linear infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  /* Lenis (landing page only) drives its own eased scroll — native CSS
+     smoothing would double up and fight it while it's mounted. */
+  html.lenis {
+    scroll-behavior: auto;
+  }
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-ink-50);
+    color: var(--color-ink-800);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .bg-grain {
+    background-image: radial-gradient(circle at 1px 1px, rgb(6 95 70 / 0.06) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+}

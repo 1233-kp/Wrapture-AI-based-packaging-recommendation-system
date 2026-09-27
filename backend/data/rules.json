@@ -1,0 +1,109 @@
+{
+  "_meta": {
+    "description": "Thresholds and weights that map commodity properties to desirable packaging material properties. Consumed by backend/engine/recommender.py. These are simplified heuristics for a rules-based prototype, not a substitute for actual shelf-life/migration testing."
+  },
+  "thresholds": {
+    "high_moisture_percent": 60,
+    "low_moisture_percent": 15,
+    "high_fat_percent": 15,
+    "acidic_ph_max": 4.6
+  },
+  "wvtr_targets_g_m2_day": {
+    "high_moisture_commodity_max_wvtr": 10,
+    "low_moisture_commodity_max_wvtr": 8,
+    "default_max_wvtr": 40
+  },
+  "otr_targets_cm3_m2_day_atm": {
+    "high_fat_commodity_max_otr": 5,
+    "category_sensitive_max_otr": 500,
+    "default_max_otr": 3000
+  },
+  "oxygen_sensitive_categories": {
+    "_note": "Categories that need a materially tighter O2 barrier for reasons OTHER than fat oxidation (the only thing high_fat_percent captures) — aroma retention for ground spices, and raw-protein freshness/color/microbial safety for meat & fish. Without this, the oxygen-fit rule only ever tightened for high-fat commodities, so a cheap low-barrier material like HDPE could win on cost+category despite being unsuitable for a spice pouch or raw meat pack. Caught by evaluation/run_evaluation.py after fixing the category-taxonomy bug exposed the gap underneath it.",
+    "categories": ["spices", "meat_fish"]
+  },
+  "moisture_sensitive_categories": {
+    "_note": "Categories where a commodity NOT already caught by the high_moisture_percent branch below (i.e. a dried/cured/intermediate-moisture product, not a fresh wet one) still needs a tight moisture barrier for a reason other than generic staleness: moisture re-uptake in a previously dehydration/salt-preserved protein risks enabling microbial regrowth — a food-safety-adjacent failure mode, not just a quality one. Without this, a commodity like dried salted fish (~20% moisture — dried enough to be 'preserved', but not dry enough to trip low_moisture_percent) fell through to the lenient default_max_wvtr target meant for genuinely moderate-moisture goods like bread or cheese, letting a merely-adequate barrier (e.g. compostable film) tie with a purpose-built barrier laminate on every other dimension and win narrowly on sustainability alone. Uses high_moisture_commodity_max_wvtr as the target (reusing the existing 'meat needs a tight barrier' number rather than inventing a new one) — fresh, wet items in this category already get that same target via the moisture_mid >= high_moisture_percent branch, so this only affects the dried/cured middle band. Caught investigating dried_fish's top pick after the 80-commodity dataset expansion; see evaluation/reference_cases.py's dried_fish_default case.",
+    "categories": ["meat_fish"]
+  },
+  "respiration_class_packaging_boost": {
+    "_note": "Explicit scoring bonus — separate from the numeric respiration_otr_bands check below — for materials tagged breathable=true in packaging_materials.json, applied when the commodity's respiration_rate_class is in 'classes'. Needed because a material can land inside the respiration_otr_bands range purely by coincidence of its own bulk resin permeability (e.g. plain LDPE is naturally permeable) without actually being a vented/perforated product engineered for produce airflow. Without this, cheap incidentally-permeable resins could outrank purpose-built breathable materials on cost/category/sustainability alone. Added after evaluation/run_evaluation.py showed strawberry and spinach (both very_high respiration) consistently NOT getting a breathable-tagged top pick.",
+    "weight": 22,
+    "classes": ["high", "very_high"]
+  },
+  "respiration_otr_bands": {
+    "very_high": { "min_otr": 3000, "max_otr": 60000 },
+    "high": { "min_otr": 1500, "max_otr": 20000 },
+    "moderate": { "min_otr": 500, "max_otr": 10000 },
+    "low": { "min_otr": 100, "max_otr": 5000 }
+  },
+  "category_preferred_material_categories": {
+    "_note": "A commodity's preferred list should include every material category tag that can physically take a flexible/rigid form matching that preference — e.g. 'flexible_film_or_rigid' and 'rigid_or_film' materials (HDPE, PP, PET) are legitimate flexible-film choices too, not just materials tagged exactly 'flexible_film'. Omitting those caused a taxonomy bug: cheap, common produce-bag materials (HDPE/PP) were losing category credit to a pricier niche material purely from a string mismatch, not an actual property difference. Caught by evaluation/run_evaluation.py.",
+    "fresh_fruit": ["flexible_film", "flexible_film_or_rigid", "rigid_or_film"],
+    "fresh_vegetable": ["flexible_film", "flexible_film_or_rigid", "rigid_or_film"],
+    "dairy": ["flexible_film_laminate", "rigid", "rigid_or_film", "flexible_film_or_rigid", "flexible_film"],
+    "dry_goods_grains": ["flexible_film_or_rigid", "rigid_paper", "flexible_film", "rigid", "rigid_or_film"],
+    "spices": ["flexible_film_laminate", "flexible_film", "flexible_film_or_rigid"],
+    "meat_fish": ["flexible_film_laminate", "flexible_film", "flexible_film_or_rigid"],
+    "bakery": ["flexible_film", "flexible_film_or_rigid", "rigid_or_film"],
+    "nuts_dried_fruits": ["flexible_film_laminate", "flexible_film", "flexible_film_or_rigid"],
+    "beverages": ["rigid", "rigid_or_film", "flexible_film_laminate", "flexible_film_or_rigid"],
+    "frozen_foods": ["flexible_film", "flexible_film_or_rigid", "flexible_film_laminate", "rigid_or_film"],
+    "ready_to_eat_snacks": ["flexible_film_laminate", "flexible_film", "flexible_film_or_rigid"]
+  },
+  "acidic_incompatible_materials": ["aluminum_foil_laminate"],
+  "packaging_format_practicality": {
+    "_note": "Genuine physical-format factor, separate from barrier performance and cost tier: how practical a material's typical packaging FORMAT is for high-volume retail distribution — weight, breakage/fragility risk in transport, and pallet/shelf density. This exists because zero-permeability materials (glass) were maxing the moisture/oxygen scores and, once their sustainability score was also high, nothing meaningfully weighed against them for everyday retail goods (cheese, butter, biscuits, cake) where a flexible film or laminate with comparable practical barrier performance is the actual industry norm — cost tier alone wasn't a strong enough counterweight. This is not 'penalize glass'; every material is scored on the same practicality question, glass simply scores low on it for a real, stated reason (heavy + fragile + low pallet density), and remains free to win on other dimensions when a rigid, zero-permeability format is genuinely decisive (e.g. very acidic or high-fat products where its barrier is precisely the point) or cost/practicality is de-prioritized (premium tier). Caught by evaluation/run_evaluation.py's Day 3 dairy/bakery mismatches. Scores are 0-10; converted to a 0-1 fraction the same way sustainability points are.",
+    "default_score": 9,
+    "overrides": {
+      "glass": 3,
+      "vented_pet_clamshell": 7
+    }
+  },
+  "weights": {
+    "moisture_fit": 25,
+    "oxygen_fit": 25,
+    "respiration_fit": 20,
+    "category_fit": 15,
+    "cost_fit": 10,
+    "sustainability_fit": 5,
+    "format_practicality_fit": 15
+  },
+  "cost_tier_score": { "low": 10, "medium": 6, "high": 3 },
+  "sustainability_score_by_recyclability_keyword": [
+    { "keyword": "widely recyclable", "score": 10 },
+    { "keyword": "industrially compostable", "score": 8 },
+    { "keyword": "recyclable via specialty stream", "score": 5 },
+    { "keyword": "follows base polymer", "score": 4 },
+    { "keyword": "not typically recyclable", "score": 1 },
+    { "keyword": "not recyclable alone", "score": 1 }
+  ],
+  "default_sustainability_score": 4,
+  "map_gas_guidance_by_respiration_class": {
+    "_note": "General, commonly-documented MAP starting-point ranges grouped by respiration rate class — not commodity-specific lab-tested values. N2 is computed as the balance (100 - O2 - CO2), not stored directly.",
+    "low": { "o2_percent": { "min": 5, "max": 10 }, "co2_percent": { "min": 5, "max": 10 } },
+    "moderate": { "o2_percent": { "min": 3, "max": 8 }, "co2_percent": { "min": 5, "max": 15 } },
+    "high": { "o2_percent": { "min": 2, "max": 5 }, "co2_percent": { "min": 10, "max": 20 } },
+    "very_high": { "o2_percent": { "min": 1, "max": 3 }, "co2_percent": { "min": 15, "max": 25 } }
+  },
+  "packaging_weight_g_per_kg_product_by_category": {
+    "_note": "Rough, CATEGORY-level estimate of how many grams of packaging material are typically used per kg of commodity packaged — e.g. a small retail spice pouch uses proportionally far more material per kg of product than a bulk grain sack, purely from surface-area-to-weight geometry, independent of which material is chosen. Used ONLY to compute the informational estimated_cost_per_unit_inr figure in /recommend/detailed (see engine/recommender.py's _estimate_packaging_cost_per_unit) — this table is NOT read anywhere in the scoring/ranking path (_score_material), and budget_tier's existing directional influence on ranking is completely unaffected by it. This table is deliberately per-CATEGORY only (surface-area-to-weight geometry of the PRODUCT), not per-material — format/density differences BETWEEN materials (e.g. a glass jar genuinely using more grams than a thin film for the same product) are handled separately, by packaging_materials.json's material_weight_multiplier, applied on top of this table's figure in the same calculation. Even with that correction, both inputs are rough directional estimates, not precise engineering data — treat the resulting cost figures as directional planning estimates, not quotes.",
+    "fresh_fruit": { "min": 15, "max": 35 },
+    "fresh_vegetable": { "min": 15, "max": 35 },
+    "dairy": { "min": 20, "max": 50 },
+    "dry_goods_grains": { "min": 10, "max": 25 },
+    "spices": { "min": 40, "max": 90 },
+    "meat_fish": { "min": 25, "max": 50 },
+    "bakery": { "min": 20, "max": 45 },
+    "nuts_dried_fruits": { "min": 35, "max": 70 },
+    "beverages": { "min": 25, "max": 55 },
+    "frozen_foods": { "min": 20, "max": 45 },
+    "ready_to_eat_snacks": { "min": 45, "max": 90 },
+    "default": { "min": 20, "max": 50 }
+  },
+  "logistics": {
+    "_note": "Converts a haversine (straight-line) distance in km into a rough estimated transport-days figure for the /logistics/estimate-transport-days endpoint (engine/logistics.py). km_per_transport_day models DIRECT ROAD FREIGHT transit time — a loaded truck actually moving city-to-city on Indian highways (accounting for loading/unloading, rest stops, checkposts, and the fact that road distance runs longer than straight-line distance) — NOT last-mile farm-to-mandi collection speed, which is far slower and not what this endpoint estimates. 350 km/day reflects typical direct road-freight timing (e.g. Mumbai-Delhi's ~1150 km straight-line distance lands around 3-4 days, matching real-world freight schedules for that route). If this constant is ever revisited, keep it anchored to direct road-freight speed, not collection/last-mile logistics — conflating the two previously produced wildly unrealistic day-counts (e.g. 25+ days for Mumbai-Delhi). min_transport_days is a floor so two nearby cities don't round to 0 days, which would be misleading (loading/handling alone takes time even for a short hop). This is explicitly a rough planning estimate, not a routed ETA — see the endpoint's disclaimer field.",
+    "km_per_transport_day": 350,
+    "min_transport_days": 0.5
+  }
+}

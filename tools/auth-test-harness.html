@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Wrapture — Supabase Auth + Backend Test Harness</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; color: #222; }
+  h1 { font-size: 1.3rem; }
+  section { border: 1px solid #ddd; border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem; }
+  label { display: block; font-size: 0.85rem; margin-top: 0.5rem; }
+  input { width: 100%; padding: 0.4rem; box-sizing: border-box; }
+  button { margin-top: 0.75rem; margin-right: 0.5rem; padding: 0.5rem 1rem; cursor: pointer; }
+  pre { background: #f5f5f5; padding: 0.75rem; overflow-x: auto; white-space: pre-wrap; word-break: break-all; }
+  .ok { color: #0a7a2f; }
+  .err { color: #b00020; }
+</style>
+</head>
+<body>
+  <h1>Wrapture — manual test harness</h1>
+  <p>Not part of the app. Just a scratch page to click through Google/GitHub sign-in via Supabase and confirm the FastAPI backend accepts the resulting token. Open this file directly in a browser (no build step needed).</p>
+
+  <section>
+    <h2>1. Supabase project config</h2>
+    <label>Project URL</label>
+    <input id="supabaseUrl" placeholder="https://YOUR-PROJECT-REF.supabase.co" />
+    <label>Anon public key</label>
+    <input id="supabaseAnonKey" placeholder="eyJ..." />
+    <button id="saveConfig">Save (stored in this browser only)</button>
+    <span id="configStatus"></span>
+  </section>
+
+  <section>
+    <h2>2. Sign in</h2>
+    <button id="signInGoogle">Sign in with Google</button>
+    <button id="signInGithub">Sign in with GitHub</button>
+    <button id="signOut">Sign out</button>
+    <pre id="sessionOutput">Not signed in.</pre>
+  </section>
+
+  <section>
+    <h2>3. Call backend /me (validates the Supabase JWT)</h2>
+    <label>Backend base URL</label>
+    <input id="backendUrl" value="http://127.0.0.1:8000" />
+    <button id="callMe">GET /me</button>
+    <pre id="meOutput">—</pre>
+  </section>
+
+  <section>
+    <h2>4. Call backend /recommend/detailed (public, no auth needed)</h2>
+    <label>Commodity id or name</label>
+    <input id="commodityId" value="banana" />
+    <button id="callRecommend">POST /recommend/detailed</button>
+    <button id="saveAsReport" disabled>Save this as a report (needs sign-in)</button>
+    <pre id="recommendOutput">—</pre>
+  </section>
+
+  <section>
+    <h2>5. Reports (protected)</h2>
+    <button id="listReports">GET /reports</button>
+    <pre id="reportsOutput">—</pre>
+  </section>
+
+  <section>
+    <h2>6. Profile (protected)</h2>
+    <button id="getProfile">GET /profile</button>
+    <pre id="profileOutput">—</pre>
+    <label>Display name</label>
+    <input id="profileDisplayName" placeholder="Ada Lovelace" />
+    <label>Preferred budget tier</label>
+    <select id="profileBudgetTier" style="width:100%; padding:0.4rem;">
+      <option value="">(unchanged)</option>
+      <option value="low">low</option>
+      <option value="medium">medium</option>
+      <option value="high">high</option>
+    </select>
+    <label><input type="checkbox" id="profileSustainability" style="width:auto; display:inline; margin-right:0.4rem;" />Prioritize sustainability</label>
+    <button id="patchProfile">PATCH /profile</button>
+  </section>
+
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+    const $ = (id) => document.getElementById(id);
+
+    const savedUrl = localStorage.getItem('psa_supabase_url') || '';
+    const savedKey = localStorage.getItem('psa_supabase_anon_key') || '';
+    $('supabaseUrl').value = savedUrl;
+    $('supabaseAnonKey').value = savedKey;
+
+    let supabase = null;
+    function initClient() {
+      const url = $('supabaseUrl').value.trim();
+      const key = $('supabaseAnonKey').value.trim();
+      if (!url || !key) return null;
+      return createClient(url, key);
+    }
+    supabase = initClient();
+
+    $('saveConfig').onclick = () => {
+      localStorage.setItem('psa_supabase_url', $('supabaseUrl').value.trim());
+      localStorage.setItem('psa_supabase_anon_key', $('supabaseAnonKey').value.trim());
+      supabase = initClient();
+      $('configStatus').textContent = supabase ? ' saved.' : ' missing url/key.';
+    };
+
+    async function renderSession() {
+      if (!supabase) { $('sessionOutput').textContent = 'Set Supabase URL + anon key first.'; return; }
+      const { data, error } = await supabase.auth.getSession();
+      if (error) { $('sessionOutput').textContent = 'Error: ' + error.message; return; }
+      if (!data.session) { $('sessionOutput').textContent = 'Not signed in.'; return; }
+      $('sessionOutput').textContent = JSON.stringify({
+        user_id: data.session.user.id,
+        email: data.session.user.email,
+        access_token: data.session.access_token.slice(0, 40) + '...(truncated)',
+      }, null, 2);
+    }
+
+    $('signInGoogle').onclick = async () => {
+      if (!supabase) return alert('Set Supabase URL + anon key first.');
+      await supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: window.location.href } });
+    };
+    $('signInGithub').onclick = async () => {
+      if (!supabase) return alert('Set Supabase URL + anon key first.');
+      await supabase.auth.signInWithOAuth({ provider: 'github', options: { redirectTo: window.location.href } });
+    };
+    $('signOut').onclick = async () => {
+      if (!supabase) return;
+      await supabase.auth.signOut();
+      renderSession();
+    };
+
+    $('callMe').onclick = async () => {
+      if (!supabase) return alert('Set Supabase URL + anon key first.');
+      const { data } = await supabase.auth.getSession();
+      if (!data.session) { $('meOutput').textContent = 'Sign in first.'; return; }
+      try {
+        const res = await fetch($('backendUrl').value.replace(/\/$/, '') + '/me', {
+          headers: { Authorization: 'Bearer ' + data.session.access_token },
+        });
+        const body = await res.json();
+        $('meOutput').textContent = `HTTP ${res.status}\n` + JSON.stringify(body, null, 2);
+      } catch (e) {
+        $('meOutput').textContent = 'Request failed: ' + e.message;
+      }
+    };
+
+    let lastDetailedResult = null;
+    let lastCommodityId = null;
+
+    function backendUrl(path) {
+      return $('backendUrl').value.replace(/\/$/, '') + path;
+    }
+
+    async function authHeaders() {
+      if (!supabase) throw new Error('Set Supabase URL + anon key first.');
+      const { data } = await supabase.auth.getSession();
+      if (!data.session) throw new Error('Sign in first.');
+      return { Authorization: 'Bearer ' + data.session.access_token };
+    }
+
+    $('callRecommend').onclick = async () => {
+      try {
+        const commodityId = $('commodityId').value.trim();
+        const res = await fetch(backendUrl('/recommend/detailed'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ commodity_id: commodityId }),
+        });
+        const body = await res.json();
+        $('recommendOutput').textContent = `HTTP ${res.status}\n` + JSON.stringify(body, null, 2);
+        if (res.ok) {
+          lastDetailedResult = body;
+          lastCommodityId = commodityId;
+          $('saveAsReport').disabled = false;
+          $('saveAsReport').textContent = `Save this as a report (${body.commodity.name})`;
+        }
+      } catch (e) {
+        $('recommendOutput').textContent = 'Request failed: ' + e.message;
+      }
+    };
+
+    $('saveAsReport').onclick = async () => {
+      if (!lastDetailedResult) return;
+      try {
+        const headers = { ...(await authHeaders()), 'Content-Type': 'application/json' };
+        const res = await fetch(backendUrl('/reports'), {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({
+            commodity_name: lastDetailedResult.commodity.name,
+            input_conditions: { commodity_id: lastCommodityId },
+            recommendation: lastDetailedResult,
+          }),
+        });
+        const body = await res.json();
+        $('recommendOutput').textContent = `Saved -> HTTP ${res.status}\n` + JSON.stringify(body, null, 2);
+      } catch (e) {
+        $('recommendOutput').textContent = 'Save failed: ' + e.message;
+      }
+    };
+
+    $('listReports').onclick = async () => {
+      try {
+        const headers = await authHeaders();
+        const res = await fetch(backendUrl('/reports?limit=20&offset=0'), { headers });
+        const body = await res.json();
+        $('reportsOutput').textContent = `HTTP ${res.status}\n` + JSON.stringify(body, null, 2);
+        if (res.ok && body.reports?.length) {
+          renderReportExportButtons(body.reports);
+        }
+      } catch (e) {
+        $('reportsOutput').textContent = 'Request failed: ' + e.message;
+      }
+    };
+
+    function renderReportExportButtons(reports) {
+      const container = document.createElement('div');
+      container.style.marginTop = '0.5rem';
+      for (const r of reports) {
+        const btn = document.createElement('button');
+        btn.textContent = `Export PDF: ${r.commodity_name} (${r.id.slice(0, 8)}...)`;
+        btn.onclick = async () => {
+          try {
+            const headers = await authHeaders();
+            const res = await fetch(backendUrl(`/reports/${r.id}/export`), { headers });
+            if (!res.ok) { alert(`Export failed: HTTP ${res.status}`); return; }
+            const blob = await res.blob();
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `wrapture-report-${r.id}.pdf`;
+            a.click();
+            URL.revokeObjectURL(url);
+          } catch (e) {
+            alert('Export failed: ' + e.message);
+          }
+        };
+        container.appendChild(btn);
+      }
+      $('reportsOutput').after(container);
+    }
+
+    $('getProfile').onclick = async () => {
+      try {
+        const headers = await authHeaders();
+        const res = await fetch(backendUrl('/profile'), { headers });
+        const body = await res.json();
+        $('profileOutput').textContent = `HTTP ${res.status}\n` + JSON.stringify(body, null, 2);
+        if (res.ok) {
+          $('profileDisplayName').value = body.display_name || '';
+          $('profileBudgetTier').value = body.preferred_budget_tier || '';
+          $('profileSustainability').checked = !!body.prioritize_sustainability;
+        }
+      } catch (e) {
+        $('profileOutput').textContent = 'Request failed: ' + e.message;
+      }
+    };
+
+    $('patchProfile').onclick = async () => {
+      try {
+        const headers = { ...(await authHeaders()), 'Content-Type': 'application/json' };
+        const patch = {};
+        if ($('profileDisplayName').value.trim()) patch.display_name = $('profileDisplayName').value.trim();
+        if ($('profileBudgetTier').value) patch.preferred_budget_tier = $('profileBudgetTier').value;
+        patch.prioritize_sustainability = $('profileSustainability').checked;
+        const res = await fetch(backendUrl('/profile'), {
+          method: 'PATCH',
+          headers,
+          body: JSON.stringify(patch),
+        });
+        const body = await res.json();
+        $('profileOutput').textContent = `HTTP ${res.status}\n` + JSON.stringify(body, null, 2);
+      } catch (e) {
+        $('profileOutput').textContent = 'Update failed: ' + e.message;
+      }
+    };
+
+    if (supabase) renderSession();
+  </script>
+</body>
+</html>

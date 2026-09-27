@@ -1,0 +1,2013 @@
+{
+  "_meta": {
+    "description": "Reference dataset of commodity physical/chemical properties used by the packaging recommendation engine. Values are typical ranges drawn from general food-science literature, not lab measurements of any specific batch. Always check 'confidence' before treating a value as authoritative, and treat 'respiration_rate_class' as applicable to fresh produce only (null for everything else).",
+    "confidence_levels": {
+      "high": "Well-established in food science references, low variability across cultivars/sources",
+      "medium": "Reasonable typical range, but can vary meaningfully by cultivar, processing, or region",
+      "low": "Rough estimate; significant variability or limited reference data"
+    },
+    "display_name_hi": "Hindi display name for this commodity, shown in the UI when Hindi is selected. The underlying 'id' stays in English/ASCII always — it's a stable key used by the API, database, and ML pipeline, never shown to end users directly."
+  },
+  "commodities": [
+    {
+      "id": "banana",
+      "name": "Banana",
+      "display_name_hi": "केला",
+      "category": "fresh_fruit",
+      "moisture_content_percent": {
+        "min": 70,
+        "max": 75
+      },
+      "fat_content_percent": {
+        "min": 0.2,
+        "max": 0.5
+      },
+      "ph_range": {
+        "min": 4.5,
+        "max": 5.2
+      },
+      "respiration_rate_class": "high",
+      "typical_ambient_shelf_life_days": {
+        "min": 3,
+        "max": 7
+      },
+      "confidence": "medium",
+      "notes": "Climacteric fruit; ripens and respires rapidly after harvest, sensitive to ethylene."
+    },
+    {
+      "id": "apple",
+      "name": "Apple",
+      "display_name_hi": "सेब",
+      "category": "fresh_fruit",
+      "moisture_content_percent": {
+        "min": 83,
+        "max": 86
+      },
+      "fat_content_percent": {
+        "min": 0.1,
+        "max": 0.3
+      },
+      "ph_range": {
+        "min": 3.3,
+        "max": 4.0
+      },
+      "respiration_rate_class": "low",
+      "typical_ambient_shelf_life_days": {
+        "min": 14,
+        "max": 30
+      },
+      "confidence": "medium",
+      "notes": "Shelf life varies widely by cultivar; cold storage extends this significantly beyond the ambient range shown."
+    },
+    {
+      "id": "mango",
+      "name": "Mango",
+      "display_name_hi": "आम",
+      "category": "fresh_fruit",
+      "moisture_content_percent": {
+        "min": 78,
+        "max": 84
+      },
+      "fat_content_percent": {
+        "min": 0.3,
+        "max": 0.6
+      },
+      "ph_range": {
+        "min": 3.4,
+        "max": 4.8
+      },
+      "respiration_rate_class": "high",
+      "typical_ambient_shelf_life_days": {
+        "min": 4,
+        "max": 9
+      },
+      "confidence": "medium",
+      "notes": "Climacteric; ripening rate strongly temperature-dependent."
+    },
+    {
+      "id": "strawberry",
+      "name": "Strawberry",
+      "display_name_hi": "स्ट्रॉबेरी",
+      "category": "fresh_fruit",
+      "moisture_content_percent": {
+        "min": 88,
+        "max": 92
+      },
+      "fat_content_percent": {
+        "min": 0.2,
+        "max": 0.4
+      },
+      "ph_range": {
+        "min": 3.0,
+        "max": 3.9
+      },
+      "respiration_rate_class": "very_high",
+      "typical_ambient_shelf_life_days": {
+        "min": 1,
+        "max": 3
+      },
+      "confidence": "medium",
+      "notes": "Highly perishable, non-climacteric, very susceptible to mechanical damage and mold."
+    },
+    {
+      "id": "grapes",
+      "name": "Grapes",
+      "display_name_hi": "अंगूर",
+      "category": "fresh_fruit",
+      "moisture_content_percent": {
+        "min": 79,
+        "max": 83
+      },
+      "fat_content_percent": {
+        "min": 0.1,
+        "max": 0.3
+      },
+      "ph_range": {
+        "min": 3.1,
+        "max": 4.5
+      },
+      "respiration_rate_class": "low",
+      "typical_ambient_shelf_life_days": {
+        "min": 3,
+        "max": 7
+      },
+      "confidence": "low",
+      "notes": "Non-climacteric; ambient shelf life estimate is rough since commercial grapes are almost always cold-chained."
+    },
+    {
+      "id": "tomato",
+      "name": "Tomato",
+      "display_name_hi": "टमाटर",
+      "category": "fresh_vegetable",
+      "moisture_content_percent": {
+        "min": 93,
+        "max": 95
+      },
+      "fat_content_percent": {
+        "min": 0.1,
+        "max": 0.3
+      },
+      "ph_range": {
+        "min": 4.0,
+        "max": 4.6
+      },
+      "respiration_rate_class": "moderate",
+      "typical_ambient_shelf_life_days": {
+        "min": 4,
+        "max": 8
+      },
+      "confidence": "medium",
+      "notes": "Climacteric; ripeness stage at packing strongly affects respiration rate."
+    },
+    {
+      "id": "potato",
+      "name": "Potato",
+      "display_name_hi": "आलू",
+      "category": "fresh_vegetable",
+      "moisture_content_percent": {
+        "min": 75,
+        "max": 80
+      },
+      "fat_content_percent": {
+        "min": 0.1,
+        "max": 0.2
+      },
+      "ph_range": {
+        "min": 5.4,
+        "max": 6.3
+      },
+      "respiration_rate_class": "low",
+      "typical_ambient_shelf_life_days": {
+        "min": 30,
+        "max": 90
+      },
+      "confidence": "medium",
+      "notes": "Long-storing tuber; needs dark, ventilated conditions to prevent sprouting and greening."
+    },
+    {
+      "id": "spinach",
+      "name": "Spinach",
+      "display_name_hi": "पालक",
+      "category": "fresh_vegetable",
+      "moisture_content_percent": {
+        "min": 90,
+        "max": 93
+      },
+      "fat_content_percent": {
+        "min": 0.3,
+        "max": 0.5
+      },
+      "ph_range": {
+        "min": 5.5,
+        "max": 6.8
+      },
+      "respiration_rate_class": "very_high",
+      "typical_ambient_shelf_life_days": {
+        "min": 1,
+        "max": 3
+      },
+      "confidence": "medium",
+      "notes": "Leafy green with very high surface-area-to-volume ratio; wilts fast without humidity control."
+    },
+    {
+      "id": "carrot",
+      "name": "Carrot",
+      "display_name_hi": "गाजर",
+      "category": "fresh_vegetable",
+      "moisture_content_percent": {
+        "min": 86,
+        "max": 90
+      },
+      "fat_content_percent": {
+        "min": 0.1,
+        "max": 0.3
+      },
+      "ph_range": {
+        "min": 5.9,
+        "max": 6.5
+      },
+      "respiration_rate_class": "low",
+      "typical_ambient_shelf_life_days": {
+        "min": 14,
+        "max": 28
+      },
+      "confidence": "medium",
+      "notes": "Root vegetable; benefits from high-humidity, low-O2 micro-environment to resist wilting."
+    },
+    {
+      "id": "onion",
+      "name": "Onion",
+      "display_name_hi": "प्याज़",
+      "category": "fresh_vegetable",
+      "moisture_content_percent": {
+        "min": 86,
+        "max": 89
+      },
+      "fat_content_percent": {
+        "min": 0.1,
+        "max": 0.2
+      },
+      "ph_range": {
+        "min": 5.3,
+        "max": 5.8
+      },
+      "respiration_rate_class": "low",
+      "typical_ambient_shelf_life_days": {
+        "min": 30,
+        "max": 60
+      },
+      "confidence": "medium",
+      "notes": "Needs ventilation, not a sealed high-humidity pack, or it will rot/sprout."
+    },
+    {
+      "id": "milk_pasteurized",
+      "name": "Milk (pasteurized, liquid)",
+      "display_name_hi": "दूध (पाश्चुरीकृत)",
+      "category": "dairy",
+      "moisture_content_percent": {
+        "min": 87,
+        "max": 88
+      },
+      "fat_content_percent": {
+        "min": 0.5,
+        "max": 4.0
+      },
+      "ph_range": {
+        "min": 6.5,
+        "max": 6.8
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 0.5,
+        "max": 1
+      },
+      "confidence": "medium",
+      "notes": "Ambient shelf life assumes standard pasteurization (not UHT/aseptic); refrigeration required almost immediately."
+    },
+    {
+      "id": "cheddar_cheese",
+      "name": "Cheddar cheese",
+      "display_name_hi": "चेडर चीज़",
+      "category": "dairy",
+      "moisture_content_percent": {
+        "min": 34,
+        "max": 38
+      },
+      "fat_content_percent": {
+        "min": 32,
+        "max": 35
+      },
+      "ph_range": {
+        "min": 5.1,
+        "max": 5.5
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 1,
+        "max": 2
+      },
+      "confidence": "low",
+      "notes": "Hard cheese; ambient shelf life is short without refrigeration, though maturation dulls this somewhat."
+    },
+    {
+      "id": "yogurt",
+      "name": "Yogurt (plain, cup)",
+      "display_name_hi": "दही",
+      "category": "dairy",
+      "moisture_content_percent": {
+        "min": 80,
+        "max": 88
+      },
+      "fat_content_percent": {
+        "min": 0.5,
+        "max": 4.0
+      },
+      "ph_range": {
+        "min": 4.0,
+        "max": 4.6
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 0.5,
+        "max": 1
+      },
+      "confidence": "medium",
+      "notes": "Live-culture product; acidity slows spoilage but cold chain is still expected."
+    },
+    {
+      "id": "butter",
+      "name": "Butter",
+      "display_name_hi": "मक्खन",
+      "category": "dairy",
+      "moisture_content_percent": {
+        "min": 15,
+        "max": 18
+      },
+      "fat_content_percent": {
+        "min": 80,
+        "max": 82
+      },
+      "ph_range": {
+        "min": 6.1,
+        "max": 6.4
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 1,
+        "max": 3
+      },
+      "confidence": "medium",
+      "notes": "High fat content makes it prone to oxidative rancidity and off-flavor absorption without a barrier layer."
+    },
+    {
+      "id": "rice",
+      "name": "Rice (milled, raw)",
+      "display_name_hi": "चावल",
+      "category": "dry_goods_grains",
+      "moisture_content_percent": {
+        "min": 12,
+        "max": 14
+      },
+      "fat_content_percent": {
+        "min": 0.3,
+        "max": 0.6
+      },
+      "ph_range": {
+        "min": 6.0,
+        "max": 6.7
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 270,
+        "max": 730
+      },
+      "confidence": "high",
+      "notes": "Low-moisture staple; main risks are moisture pickup, insect infestation, and rancidity in the germ layer."
+    },
+    {
+      "id": "wheat_flour",
+      "name": "Wheat flour",
+      "display_name_hi": "गेहूं का आटा",
+      "category": "dry_goods_grains",
+      "moisture_content_percent": {
+        "min": 12,
+        "max": 14
+      },
+      "fat_content_percent": {
+        "min": 1.0,
+        "max": 2.0
+      },
+      "ph_range": {
+        "min": 5.8,
+        "max": 6.4
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 180,
+        "max": 365
+      },
+      "confidence": "high",
+      "notes": "Whole wheat flour spoils faster than refined due to higher germ/oil content; range shown is for refined flour."
+    },
+    {
+      "id": "lentils_dal",
+      "name": "Lentils (dal, dry)",
+      "display_name_hi": "दाल",
+      "category": "dry_goods_grains",
+      "moisture_content_percent": {
+        "min": 10,
+        "max": 12
+      },
+      "fat_content_percent": {
+        "min": 0.8,
+        "max": 1.5
+      },
+      "ph_range": {
+        "min": 6.3,
+        "max": 6.8
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 270,
+        "max": 730
+      },
+      "confidence": "high",
+      "notes": "Very stable dry pulse; primary risks are moisture pickup and pest infestation."
+    },
+    {
+      "id": "sugar",
+      "name": "Sugar (refined, granulated)",
+      "display_name_hi": "चीनी",
+      "category": "dry_goods_grains",
+      "moisture_content_percent": {
+        "min": 0.02,
+        "max": 0.1
+      },
+      "fat_content_percent": {
+        "min": 0.0,
+        "max": 0.0
+      },
+      "ph_range": {
+        "min": 5.5,
+        "max": 7.0
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 730,
+        "max": 1825
+      },
+      "confidence": "high",
+      "notes": "Essentially shelf-stable indefinitely if kept dry; main risk is caking from humidity ingress."
+    },
+    {
+      "id": "oats",
+      "name": "Oats (rolled)",
+      "display_name_hi": "ओट्स",
+      "category": "dry_goods_grains",
+      "moisture_content_percent": {
+        "min": 8,
+        "max": 11
+      },
+      "fat_content_percent": {
+        "min": 6.5,
+        "max": 8.5
+      },
+      "ph_range": {
+        "min": 6.0,
+        "max": 6.8
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 180,
+        "max": 365
+      },
+      "confidence": "medium",
+      "notes": "Higher fat content than other grains makes oxidative rancidity a bigger factor; benefits from an O2 barrier."
+    },
+    {
+      "id": "turmeric_powder",
+      "name": "Turmeric powder",
+      "display_name_hi": "हल्दी पाउडर",
+      "category": "spices",
+      "moisture_content_percent": {
+        "min": 6,
+        "max": 9
+      },
+      "fat_content_percent": {
+        "min": 5,
+        "max": 10
+      },
+      "ph_range": {
+        "min": 5.5,
+        "max": 7.5
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 365,
+        "max": 730
+      },
+      "confidence": "medium",
+      "notes": "Volatile oil and color (curcumin) degrade under light and heat; opaque barrier pack preferred."
+    },
+    {
+      "id": "black_pepper",
+      "name": "Black pepper (ground)",
+      "display_name_hi": "काली मिर्च",
+      "category": "spices",
+      "moisture_content_percent": {
+        "min": 8,
+        "max": 12
+      },
+      "fat_content_percent": {
+        "min": 6,
+        "max": 10
+      },
+      "ph_range": {
+        "min": 5.0,
+        "max": 6.5
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 270,
+        "max": 545
+      },
+      "confidence": "medium",
+      "notes": "Ground pepper loses volatile aroma compounds faster than whole peppercorns; needs a good aroma barrier."
+    },
+    {
+      "id": "red_chili_powder",
+      "name": "Red chili powder",
+      "display_name_hi": "लाल मिर्च पाउडर",
+      "category": "spices",
+      "moisture_content_percent": {
+        "min": 7,
+        "max": 10
+      },
+      "fat_content_percent": {
+        "min": 8,
+        "max": 14
+      },
+      "ph_range": {
+        "min": 4.5,
+        "max": 5.8
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 270,
+        "max": 545
+      },
+      "confidence": "medium",
+      "notes": "Color (capsanthin) and pungency degrade under light/heat/oxygen exposure."
+    },
+    {
+      "id": "cumin_seeds",
+      "name": "Cumin seeds (whole)",
+      "display_name_hi": "जीरा",
+      "category": "spices",
+      "moisture_content_percent": {
+        "min": 7,
+        "max": 10
+      },
+      "fat_content_percent": {
+        "min": 15,
+        "max": 18
+      },
+      "ph_range": {
+        "min": 5.5,
+        "max": 7.0
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 365,
+        "max": 730
+      },
+      "confidence": "medium",
+      "notes": "Whole seeds retain aroma/oil much longer than ground spice; still benefits from a moisture/O2 barrier."
+    },
+    {
+      "id": "chicken_fresh",
+      "name": "Chicken (fresh, raw, whole/cut)",
+      "display_name_hi": "चिकन (ताज़ा)",
+      "category": "meat_fish",
+      "moisture_content_percent": {
+        "min": 65,
+        "max": 70
+      },
+      "fat_content_percent": {
+        "min": 8,
+        "max": 15
+      },
+      "ph_range": {
+        "min": 5.7,
+        "max": 6.4
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 0.25,
+        "max": 0.5
+      },
+      "confidence": "medium",
+      "notes": "High-risk perishable; effectively requires continuous cold chain, ambient life is only hours."
+    },
+    {
+      "id": "mutton_fresh",
+      "name": "Mutton (fresh, raw)",
+      "display_name_hi": "मटन (ताज़ा)",
+      "category": "meat_fish",
+      "moisture_content_percent": {
+        "min": 60,
+        "max": 70
+      },
+      "fat_content_percent": {
+        "min": 14,
+        "max": 25
+      },
+      "ph_range": {
+        "min": 5.5,
+        "max": 6.2
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 0.25,
+        "max": 0.5
+      },
+      "confidence": "low",
+      "notes": "Fat content varies a lot by cut; ambient shelf life is a rough hours-scale estimate."
+    },
+    {
+      "id": "fish_fresh_whole",
+      "name": "Fish (fresh, whole)",
+      "display_name_hi": "मछली (ताज़ी, साबुत)",
+      "category": "meat_fish",
+      "moisture_content_percent": {
+        "min": 70,
+        "max": 80
+      },
+      "fat_content_percent": {
+        "min": 1,
+        "max": 12
+      },
+      "ph_range": {
+        "min": 6.0,
+        "max": 6.8
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 0.2,
+        "max": 0.4
+      },
+      "confidence": "low",
+      "notes": "Fat content is highly species-dependent (lean whitefish vs. oily fish); spoils faster than red meat at same temperature."
+    },
+    {
+      "id": "shrimp_fresh",
+      "name": "Shrimp (fresh, raw)",
+      "display_name_hi": "झींगा (ताज़ा)",
+      "category": "meat_fish",
+      "moisture_content_percent": {
+        "min": 75,
+        "max": 80
+      },
+      "fat_content_percent": {
+        "min": 1,
+        "max": 2
+      },
+      "ph_range": {
+        "min": 6.8,
+        "max": 7.5
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 0.2,
+        "max": 0.3
+      },
+      "confidence": "low",
+      "notes": "Very high spoilage risk (enzymatic + microbial); near-freezing cold chain from harvest is standard practice."
+    },
+    {
+      "id": "white_bread",
+      "name": "White bread (sliced loaf)",
+      "display_name_hi": "सफ़ेद ब्रेड",
+      "category": "bakery",
+      "moisture_content_percent": {
+        "min": 35,
+        "max": 40
+      },
+      "fat_content_percent": {
+        "min": 2,
+        "max": 4
+      },
+      "ph_range": {
+        "min": 5.0,
+        "max": 6.0
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 3,
+        "max": 7
+      },
+      "confidence": "medium",
+      "notes": "Mold growth is the main failure mode; moisture barrier plus limited O2 ingress both matter."
+    },
+    {
+      "id": "biscuits_cookies",
+      "name": "Biscuits / cookies",
+      "display_name_hi": "बिस्किट/कुकीज़",
+      "category": "bakery",
+      "moisture_content_percent": {
+        "min": 2,
+        "max": 5
+      },
+      "fat_content_percent": {
+        "min": 15,
+        "max": 25
+      },
+      "ph_range": {
+        "min": 6.0,
+        "max": 7.0
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 90,
+        "max": 180
+      },
+      "confidence": "medium",
+      "notes": "Low moisture but high fat: oxidative rancidity and staling from moisture pickup are the two failure modes."
+    },
+    {
+      "id": "cake_frosted",
+      "name": "Cake (frosted)",
+      "display_name_hi": "केक (फ्रॉस्टिंग सहित)",
+      "category": "bakery",
+      "moisture_content_percent": {
+        "min": 25,
+        "max": 35
+      },
+      "fat_content_percent": {
+        "min": 15,
+        "max": 25
+      },
+      "ph_range": {
+        "min": 6.5,
+        "max": 7.5
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 1,
+        "max": 3
+      },
+      "confidence": "low",
+      "notes": "Highly variable by frosting/filling type (cream vs. fondant); dairy-based fillings push this toward refrigeration."
+    },
+    {
+      "id": "orange",
+      "name": "Orange",
+      "display_name_hi": "संतरा",
+      "category": "fresh_fruit",
+      "moisture_content_percent": {
+        "min": 86,
+        "max": 88
+      },
+      "fat_content_percent": {
+        "min": 0.1,
+        "max": 0.2
+      },
+      "ph_range": {
+        "min": 3.0,
+        "max": 4.0
+      },
+      "respiration_rate_class": "low",
+      "typical_ambient_shelf_life_days": {
+        "min": 14,
+        "max": 28
+      },
+      "confidence": "medium",
+      "notes": "Non-climacteric citrus; thick rind and low respiration give it good ambient storage life relative to most fresh fruit."
+    },
+    {
+      "id": "papaya",
+      "name": "Papaya",
+      "display_name_hi": "पपीता",
+      "category": "fresh_fruit",
+      "moisture_content_percent": {
+        "min": 86,
+        "max": 89
+      },
+      "fat_content_percent": {
+        "min": 0.1,
+        "max": 0.3
+      },
+      "ph_range": {
+        "min": 5.0,
+        "max": 6.0
+      },
+      "respiration_rate_class": "high",
+      "typical_ambient_shelf_life_days": {
+        "min": 3,
+        "max": 6
+      },
+      "confidence": "medium",
+      "notes": "Climacteric; ripens and softens quickly at ambient temperature, similar risk profile to mango/banana."
+    },
+    {
+      "id": "pomegranate",
+      "name": "Pomegranate",
+      "display_name_hi": "अनार",
+      "category": "fresh_fruit",
+      "moisture_content_percent": {
+        "min": 78,
+        "max": 82
+      },
+      "fat_content_percent": {
+        "min": 0.9,
+        "max": 1.2
+      },
+      "ph_range": {
+        "min": 2.9,
+        "max": 3.8
+      },
+      "respiration_rate_class": "low",
+      "typical_ambient_shelf_life_days": {
+        "min": 14,
+        "max": 30
+      },
+      "confidence": "low",
+      "notes": "Thick rind gives unusually good ambient storage life for a fresh fruit; whole-fruit values only, arils behave very differently once cut."
+    },
+    {
+      "id": "watermelon",
+      "name": "Watermelon",
+      "display_name_hi": "तरबूज",
+      "category": "fresh_fruit",
+      "moisture_content_percent": {
+        "min": 91,
+        "max": 93
+      },
+      "fat_content_percent": {
+        "min": 0.1,
+        "max": 0.2
+      },
+      "ph_range": {
+        "min": 5.2,
+        "max": 5.8
+      },
+      "respiration_rate_class": "low",
+      "typical_ambient_shelf_life_days": {
+        "min": 7,
+        "max": 14
+      },
+      "confidence": "medium",
+      "notes": "Non-climacteric; whole-fruit values only — cut watermelon spoils within a day or two and needs an entirely different pack format."
+    },
+    {
+      "id": "cauliflower",
+      "name": "Cauliflower",
+      "display_name_hi": "फूलगोभी",
+      "category": "fresh_vegetable",
+      "moisture_content_percent": {
+        "min": 90,
+        "max": 92
+      },
+      "fat_content_percent": {
+        "min": 0.1,
+        "max": 0.3
+      },
+      "ph_range": {
+        "min": 5.6,
+        "max": 6.0
+      },
+      "respiration_rate_class": "moderate",
+      "typical_ambient_shelf_life_days": {
+        "min": 3,
+        "max": 7
+      },
+      "confidence": "medium",
+      "notes": "Cruciferous; moderate respiration and prone to browning/wilting of the curd without humidity control."
+    },
+    {
+      "id": "cabbage",
+      "name": "Cabbage",
+      "display_name_hi": "पत्तागोभी",
+      "category": "fresh_vegetable",
+      "moisture_content_percent": {
+        "min": 92,
+        "max": 95
+      },
+      "fat_content_percent": {
+        "min": 0.1,
+        "max": 0.2
+      },
+      "ph_range": {
+        "min": 5.5,
+        "max": 6.7
+      },
+      "respiration_rate_class": "low",
+      "typical_ambient_shelf_life_days": {
+        "min": 14,
+        "max": 30
+      },
+      "confidence": "medium",
+      "notes": "Dense head structure gives notably low respiration and long ambient storage life for a leafy vegetable."
+    },
+    {
+      "id": "cucumber",
+      "name": "Cucumber",
+      "display_name_hi": "खीरा",
+      "category": "fresh_vegetable",
+      "moisture_content_percent": {
+        "min": 95,
+        "max": 97
+      },
+      "fat_content_percent": {
+        "min": 0.1,
+        "max": 0.2
+      },
+      "ph_range": {
+        "min": 5.1,
+        "max": 5.7
+      },
+      "respiration_rate_class": "moderate",
+      "typical_ambient_shelf_life_days": {
+        "min": 5,
+        "max": 10
+      },
+      "confidence": "medium",
+      "notes": "Very high moisture and thin skin make it prone to shriveling; chilling-sensitive but tracked here at ambient."
+    },
+    {
+      "id": "capsicum_bell_pepper",
+      "name": "Capsicum / bell pepper",
+      "display_name_hi": "शिमला मिर्च",
+      "category": "fresh_vegetable",
+      "moisture_content_percent": {
+        "min": 92,
+        "max": 94
+      },
+      "fat_content_percent": {
+        "min": 0.2,
+        "max": 0.5
+      },
+      "ph_range": {
+        "min": 4.6,
+        "max": 5.5
+      },
+      "respiration_rate_class": "moderate",
+      "typical_ambient_shelf_life_days": {
+        "min": 7,
+        "max": 14
+      },
+      "confidence": "medium",
+      "notes": "Waxy skin gives reasonable ambient storage life; shrivels and softens as it loses moisture over time."
+    },
+    {
+      "id": "paneer",
+      "name": "Paneer (fresh, unripened)",
+      "display_name_hi": "पनीर",
+      "category": "dairy",
+      "moisture_content_percent": {
+        "min": 50,
+        "max": 60
+      },
+      "fat_content_percent": {
+        "min": 20,
+        "max": 25
+      },
+      "ph_range": {
+        "min": 5.3,
+        "max": 5.6
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 0.5,
+        "max": 1
+      },
+      "confidence": "low",
+      "notes": "Fresh unripened cheese, no aging/curing to slow spoilage — behaves like a highly perishable dairy product; refrigeration required almost immediately."
+    },
+    {
+      "id": "cream",
+      "name": "Dairy cream",
+      "display_name_hi": "मलाई/क्रीम",
+      "category": "dairy",
+      "moisture_content_percent": {
+        "min": 55,
+        "max": 70
+      },
+      "fat_content_percent": {
+        "min": 20,
+        "max": 40
+      },
+      "ph_range": {
+        "min": 6.4,
+        "max": 6.7
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 0.5,
+        "max": 1
+      },
+      "confidence": "medium",
+      "notes": "Fat content varies widely by cream type (light to heavy); assumes standard pasteurization, not UHT — refrigeration required almost immediately, same caveat as milk_pasteurized."
+    },
+    {
+      "id": "condensed_milk",
+      "name": "Sweetened condensed milk (canned/sealed)",
+      "display_name_hi": "गाढ़ा दूध (कंडेंस्ड मिल्क)",
+      "category": "dairy",
+      "moisture_content_percent": {
+        "min": 27,
+        "max": 30
+      },
+      "fat_content_percent": {
+        "min": 8,
+        "max": 10
+      },
+      "ph_range": {
+        "min": 6.0,
+        "max": 6.5
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 270,
+        "max": 540
+      },
+      "confidence": "medium",
+      "notes": "High sugar content and sealed can/tube packaging give it an unusually long ambient shelf life for a dairy product; figure assumes unopened."
+    },
+    {
+      "id": "ghee",
+      "name": "Ghee (clarified butter)",
+      "display_name_hi": "घी",
+      "category": "dairy",
+      "moisture_content_percent": {
+        "min": 0.1,
+        "max": 0.3
+      },
+      "fat_content_percent": {
+        "min": 99,
+        "max": 100
+      },
+      "ph_range": {
+        "min": 6.0,
+        "max": 7.0
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 180,
+        "max": 365
+      },
+      "confidence": "medium",
+      "notes": "Near-anhydrous milk fat; removing moisture during clarification is precisely what gives it long ambient stability unlike butter, though oxidative rancidity of the fat is still a real long-term risk."
+    },
+    {
+      "id": "chickpeas_dry",
+      "name": "Chickpeas (chana, dry)",
+      "display_name_hi": "चना",
+      "category": "dry_goods_grains",
+      "moisture_content_percent": {
+        "min": 10,
+        "max": 12
+      },
+      "fat_content_percent": {
+        "min": 5,
+        "max": 6
+      },
+      "ph_range": {
+        "min": 6.0,
+        "max": 6.5
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 270,
+        "max": 730
+      },
+      "confidence": "high",
+      "notes": "Stable dry pulse, same storage risk profile as lentils_dal: moisture pickup and pest infestation."
+    },
+    {
+      "id": "kidney_beans_dry",
+      "name": "Kidney beans (rajma, dry)",
+      "display_name_hi": "राजमा",
+      "category": "dry_goods_grains",
+      "moisture_content_percent": {
+        "min": 10,
+        "max": 12
+      },
+      "fat_content_percent": {
+        "min": 1.0,
+        "max": 1.5
+      },
+      "ph_range": {
+        "min": 6.0,
+        "max": 6.5
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 270,
+        "max": 730
+      },
+      "confidence": "high",
+      "notes": "Very stable dry pulse; primary risks are moisture pickup and pest infestation."
+    },
+    {
+      "id": "moong_dal",
+      "name": "Moong dal (split green gram, dry)",
+      "display_name_hi": "मूंग दाल",
+      "category": "dry_goods_grains",
+      "moisture_content_percent": {
+        "min": 9,
+        "max": 11
+      },
+      "fat_content_percent": {
+        "min": 1.0,
+        "max": 1.5
+      },
+      "ph_range": {
+        "min": 6.3,
+        "max": 6.8
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 270,
+        "max": 730
+      },
+      "confidence": "high",
+      "notes": "Another common dal variety alongside lentils_dal; same low-moisture stability profile."
+    },
+    {
+      "id": "quinoa",
+      "name": "Quinoa (dry)",
+      "display_name_hi": "क्विनोआ",
+      "category": "dry_goods_grains",
+      "moisture_content_percent": {
+        "min": 10,
+        "max": 13
+      },
+      "fat_content_percent": {
+        "min": 5,
+        "max": 7
+      },
+      "ph_range": {
+        "min": 6.0,
+        "max": 7.0
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 270,
+        "max": 545
+      },
+      "confidence": "medium",
+      "notes": "Notably higher fat content than rice/wheat, so oxidative rancidity of the germ is a bigger factor than for most grains, similar to oats."
+    },
+    {
+      "id": "semolina",
+      "name": "Semolina (sooji/rava)",
+      "display_name_hi": "सूजी/रवा",
+      "category": "dry_goods_grains",
+      "moisture_content_percent": {
+        "min": 12,
+        "max": 14
+      },
+      "fat_content_percent": {
+        "min": 1.0,
+        "max": 1.5
+      },
+      "ph_range": {
+        "min": 6.0,
+        "max": 6.5
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 180,
+        "max": 365
+      },
+      "confidence": "medium",
+      "notes": "Coarser durum wheat milling product; similar stability to wheat flour but slightly shorter shelf life is commonly cited."
+    },
+    {
+      "id": "coriander_powder",
+      "name": "Coriander powder",
+      "display_name_hi": "धनिया पाउडर",
+      "category": "spices",
+      "moisture_content_percent": {
+        "min": 8,
+        "max": 10
+      },
+      "fat_content_percent": {
+        "min": 15,
+        "max": 18
+      },
+      "ph_range": {
+        "min": 5.5,
+        "max": 7.0
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 270,
+        "max": 545
+      },
+      "confidence": "medium",
+      "notes": "Higher essential-oil content than pepper/chili powder; needs a good aroma/O2 barrier or flavor fades quickly."
+    },
+    {
+      "id": "cardamom_green",
+      "name": "Cardamom (green, whole pods)",
+      "display_name_hi": "हरी इलायची",
+      "category": "spices",
+      "moisture_content_percent": {
+        "min": 8,
+        "max": 10
+      },
+      "fat_content_percent": {
+        "min": 5,
+        "max": 10
+      },
+      "ph_range": {
+        "min": 5.5,
+        "max": 6.5
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 365,
+        "max": 730
+      },
+      "confidence": "medium",
+      "notes": "Whole pods retain volatile aroma oils much longer than ground spice, similar to whole cumin seeds."
+    },
+    {
+      "id": "cloves",
+      "name": "Cloves (whole)",
+      "display_name_hi": "लौंग",
+      "category": "spices",
+      "moisture_content_percent": {
+        "min": 8,
+        "max": 12
+      },
+      "fat_content_percent": {
+        "min": 10,
+        "max": 15
+      },
+      "ph_range": {
+        "min": 5.5,
+        "max": 6.5
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 365,
+        "max": 730
+      },
+      "confidence": "medium",
+      "notes": "High eugenol oil content gives whole cloves unusually good aroma stability for a spice."
+    },
+    {
+      "id": "mustard_seeds",
+      "name": "Mustard seeds (whole)",
+      "display_name_hi": "सरसों के बीज",
+      "category": "spices",
+      "moisture_content_percent": {
+        "min": 6,
+        "max": 9
+      },
+      "fat_content_percent": {
+        "min": 28,
+        "max": 36
+      },
+      "ph_range": {
+        "min": 5.5,
+        "max": 6.5
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 365,
+        "max": 730
+      },
+      "confidence": "medium",
+      "notes": "Notably high oil content for a whole spice; still shelf-stable long-term but benefits from an O2 barrier against rancidity."
+    },
+    {
+      "id": "dried_ginger_powder",
+      "name": "Dried ginger powder (sonth)",
+      "display_name_hi": "सोंठ (सूखी अदरक पाउडर)",
+      "category": "spices",
+      "moisture_content_percent": {
+        "min": 8,
+        "max": 12
+      },
+      "fat_content_percent": {
+        "min": 4,
+        "max": 8
+      },
+      "ph_range": {
+        "min": 5.5,
+        "max": 6.5
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 270,
+        "max": 545
+      },
+      "confidence": "low",
+      "notes": "More variable than other ground spices in the dataset depending on drying method; treat this range as a rough estimate."
+    },
+    {
+      "id": "fish_fillet_fresh",
+      "name": "Fish fillet (fresh, boneless cut)",
+      "display_name_hi": "मछली फिलेट (ताज़ा)",
+      "category": "meat_fish",
+      "moisture_content_percent": {
+        "min": 70,
+        "max": 80
+      },
+      "fat_content_percent": {
+        "min": 1,
+        "max": 12
+      },
+      "ph_range": {
+        "min": 6.0,
+        "max": 6.8
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 0.15,
+        "max": 0.3
+      },
+      "confidence": "low",
+      "notes": "More exposed flesh surface area than a whole fish, so ambient shelf life is estimated slightly shorter than fish_fresh_whole; fat content is similarly species-dependent."
+    },
+    {
+      "id": "prawns_fresh",
+      "name": "Prawns (fresh, raw)",
+      "display_name_hi": "झींगा/प्रॉन्स (ताज़ा)",
+      "category": "meat_fish",
+      "moisture_content_percent": {
+        "min": 75,
+        "max": 80
+      },
+      "fat_content_percent": {
+        "min": 1,
+        "max": 2
+      },
+      "ph_range": {
+        "min": 6.8,
+        "max": 7.5
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 0.2,
+        "max": 0.3
+      },
+      "confidence": "low",
+      "notes": "Essentially the same packaging-relevant profile as shrimp_fresh (a larger crustacean, same enzymatic/microbial spoilage risk) — included separately since they're distinct commercial items in Indian retail."
+    },
+    {
+      "id": "processed_deli_meat",
+      "name": "Processed/cured deli meat (sliced)",
+      "display_name_hi": "प्रोसेस्ड डेली मीट",
+      "category": "meat_fish",
+      "moisture_content_percent": {
+        "min": 55,
+        "max": 65
+      },
+      "fat_content_percent": {
+        "min": 15,
+        "max": 25
+      },
+      "ph_range": {
+        "min": 5.5,
+        "max": 6.2
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 0.5,
+        "max": 1
+      },
+      "confidence": "low",
+      "notes": "Curing/processing extends refrigerated shelf life considerably versus raw meat, but sliced deli meat still requires a cold chain — ambient figure assumes no refrigeration, same framing as chicken_fresh."
+    },
+    {
+      "id": "minced_meat_fresh",
+      "name": "Minced/ground meat (fresh, keema)",
+      "display_name_hi": "कीमा (ताज़ा)",
+      "category": "meat_fish",
+      "moisture_content_percent": {
+        "min": 65,
+        "max": 72
+      },
+      "fat_content_percent": {
+        "min": 10,
+        "max": 20
+      },
+      "ph_range": {
+        "min": 5.5,
+        "max": 6.2
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 0.1,
+        "max": 0.25
+      },
+      "confidence": "low",
+      "notes": "Grinding greatly increases exposed surface area versus a whole cut, so it's generally considered more perishable than mutton_fresh/chicken_fresh at the same temperature."
+    },
+    {
+      "id": "dried_fish",
+      "name": "Dried fish (salted, traditional preservation)",
+      "display_name_hi": "सूखी मछली",
+      "category": "meat_fish",
+      "moisture_content_percent": {
+        "min": 15,
+        "max": 25
+      },
+      "fat_content_percent": {
+        "min": 2,
+        "max": 10
+      },
+      "ph_range": {
+        "min": 6.0,
+        "max": 7.0
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 90,
+        "max": 270
+      },
+      "confidence": "low",
+      "notes": "Salting/sun-drying dramatically extends shelf life versus fresh fish, but moisture and fat content vary hugely by species and drying method — treat as a rough estimate; added salt content (not captured by pH) is part of what inhibits spoilage."
+    },
+    {
+      "id": "rusk_toast",
+      "name": "Rusk (toasted bread)",
+      "display_name_hi": "रस्क/टोस्ट",
+      "category": "bakery",
+      "moisture_content_percent": {
+        "min": 4,
+        "max": 7
+      },
+      "fat_content_percent": {
+        "min": 6,
+        "max": 10
+      },
+      "ph_range": {
+        "min": 5.5,
+        "max": 6.5
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 60,
+        "max": 120
+      },
+      "confidence": "medium",
+      "notes": "Double-baked/toasted to drive off moisture, giving it much longer ambient shelf life than the white_bread it's made from — mold risk is greatly reduced, staling/rancidity are the main failure modes."
+    },
+    {
+      "id": "muffins_plain",
+      "name": "Muffins (plain)",
+      "display_name_hi": "मफिन (सादा)",
+      "category": "bakery",
+      "moisture_content_percent": {
+        "min": 20,
+        "max": 28
+      },
+      "fat_content_percent": {
+        "min": 10,
+        "max": 18
+      },
+      "ph_range": {
+        "min": 5.5,
+        "max": 7.0
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 3,
+        "max": 7
+      },
+      "confidence": "low",
+      "notes": "Moisture/fat content varies a lot by recipe; similar mold-risk profile to white_bread."
+    },
+    {
+      "id": "croissant",
+      "name": "Croissant",
+      "display_name_hi": "क्रोइसां",
+      "category": "bakery",
+      "moisture_content_percent": {
+        "min": 25,
+        "max": 32
+      },
+      "fat_content_percent": {
+        "min": 18,
+        "max": 28
+      },
+      "ph_range": {
+        "min": 5.5,
+        "max": 6.5
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 1,
+        "max": 3
+      },
+      "confidence": "low",
+      "notes": "Laminated, high-butter-content pastry; short shelf life from both mold risk (moisture) and rapid staling/rancidity (fat)."
+    },
+    {
+      "id": "almonds",
+      "name": "Almonds (raw, shelled)",
+      "display_name_hi": "बादाम",
+      "category": "nuts_dried_fruits",
+      "moisture_content_percent": {
+        "min": 4,
+        "max": 6
+      },
+      "fat_content_percent": {
+        "min": 49,
+        "max": 53
+      },
+      "ph_range": {
+        "min": 6.0,
+        "max": 7.0
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 180,
+        "max": 365
+      },
+      "confidence": "medium",
+      "notes": "Very high fat content makes oxidative rancidity the primary failure mode; among the more shelf-stable common nuts."
+    },
+    {
+      "id": "cashews",
+      "name": "Cashews (raw, shelled)",
+      "display_name_hi": "काजू",
+      "category": "nuts_dried_fruits",
+      "moisture_content_percent": {
+        "min": 5,
+        "max": 7
+      },
+      "fat_content_percent": {
+        "min": 43,
+        "max": 48
+      },
+      "ph_range": {
+        "min": 6.0,
+        "max": 7.0
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 90,
+        "max": 180
+      },
+      "confidence": "medium",
+      "notes": "More prone to rancidity than almonds at ambient temperature, so a shorter typical shelf life is commonly cited."
+    },
+    {
+      "id": "walnuts",
+      "name": "Walnuts (shelled)",
+      "display_name_hi": "अखरोट",
+      "category": "nuts_dried_fruits",
+      "moisture_content_percent": {
+        "min": 3,
+        "max": 5
+      },
+      "fat_content_percent": {
+        "min": 60,
+        "max": 65
+      },
+      "ph_range": {
+        "min": 5.5,
+        "max": 6.5
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 60,
+        "max": 180
+      },
+      "confidence": "medium",
+      "notes": "Among the highest-fat common nuts and notably prone to going rancid fastest at ambient temperature without a good O2 barrier."
+    },
+    {
+      "id": "peanuts",
+      "name": "Peanuts (raw, shelled)",
+      "display_name_hi": "मूंगफली",
+      "category": "nuts_dried_fruits",
+      "moisture_content_percent": {
+        "min": 5,
+        "max": 8
+      },
+      "fat_content_percent": {
+        "min": 44,
+        "max": 50
+      },
+      "ph_range": {
+        "min": 6.0,
+        "max": 6.8
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 90,
+        "max": 180
+      },
+      "confidence": "medium",
+      "notes": "High fat content drives the same oxidative-rancidity risk as tree nuts."
+    },
+    {
+      "id": "raisins",
+      "name": "Raisins (dried grapes)",
+      "display_name_hi": "किशमिश",
+      "category": "nuts_dried_fruits",
+      "moisture_content_percent": {
+        "min": 15,
+        "max": 18
+      },
+      "fat_content_percent": {
+        "min": 0.3,
+        "max": 0.6
+      },
+      "ph_range": {
+        "min": 3.5,
+        "max": 3.9
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 180,
+        "max": 365
+      },
+      "confidence": "medium",
+      "notes": "Low fat and low water activity from drying/sugar concentration give good ambient stability; main risks are moisture pickup and crystallization."
+    },
+    {
+      "id": "dried_apricots",
+      "name": "Dried apricots",
+      "display_name_hi": "सूखी खुबानी",
+      "category": "nuts_dried_fruits",
+      "moisture_content_percent": {
+        "min": 15,
+        "max": 20
+      },
+      "fat_content_percent": {
+        "min": 0.4,
+        "max": 0.7
+      },
+      "ph_range": {
+        "min": 3.4,
+        "max": 3.8
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 180,
+        "max": 365
+      },
+      "confidence": "medium",
+      "notes": "Semi-moist dried fruit (not bone-dry like raisins); low fat, acidic, benefits from a moisture barrier to prevent both drying further and mold growth."
+    },
+    {
+      "id": "fruit_juice_bottled",
+      "name": "Fruit juice (bottled, pasteurized)",
+      "display_name_hi": "फल का जूस (बोतलबंद)",
+      "category": "beverages",
+      "moisture_content_percent": {
+        "min": 88,
+        "max": 92
+      },
+      "fat_content_percent": {
+        "min": 0.1,
+        "max": 0.3
+      },
+      "ph_range": {
+        "min": 3.0,
+        "max": 4.0
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 1,
+        "max": 3
+      },
+      "confidence": "medium",
+      "notes": "Assumes standard pasteurization (not UHT/aseptic) — same framing as milk_pasteurized; UHT/aseptic-packed juice is shelf-stable far longer but is a different product/process not modeled here."
+    },
+    {
+      "id": "flavored_milk",
+      "name": "Flavored milk (dairy-based, pasteurized)",
+      "display_name_hi": "फ्लेवर्ड दूध",
+      "category": "beverages",
+      "moisture_content_percent": {
+        "min": 82,
+        "max": 86
+      },
+      "fat_content_percent": {
+        "min": 1.5,
+        "max": 3.5
+      },
+      "ph_range": {
+        "min": 6.3,
+        "max": 6.7
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 0.5,
+        "max": 1
+      },
+      "confidence": "medium",
+      "notes": "Same cold-chain dependency as plain milk_pasteurized; assumes standard pasteurization, not UHT."
+    },
+    {
+      "id": "lassi_dairy_drink",
+      "name": "Lassi (dairy-based yogurt drink)",
+      "display_name_hi": "लस्सी",
+      "category": "beverages",
+      "moisture_content_percent": {
+        "min": 80,
+        "max": 85
+      },
+      "fat_content_percent": {
+        "min": 1,
+        "max": 4
+      },
+      "ph_range": {
+        "min": 4.0,
+        "max": 4.5
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 0.5,
+        "max": 1
+      },
+      "confidence": "medium",
+      "notes": "Fermented dairy drink, similar acidity/spoilage profile to yogurt; refrigeration required almost immediately."
+    },
+    {
+      "id": "coconut_water_packaged",
+      "name": "Coconut water (packaged, pasteurized)",
+      "display_name_hi": "नारियल पानी (पैक्ड)",
+      "category": "beverages",
+      "moisture_content_percent": {
+        "min": 94,
+        "max": 96
+      },
+      "fat_content_percent": {
+        "min": 0.1,
+        "max": 0.2
+      },
+      "ph_range": {
+        "min": 4.5,
+        "max": 5.5
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 1,
+        "max": 3
+      },
+      "confidence": "low",
+      "notes": "Assumes standard pasteurization, not UHT/aseptic tetra-pak (which is a common real format with much longer ambient life) — treat as a rough estimate given how much real products vary by process."
+    },
+    {
+      "id": "iced_tea_bottled",
+      "name": "Iced tea (bottled, sweetened, pasteurized)",
+      "display_name_hi": "आइस्ड टी (बोतलबंद)",
+      "category": "beverages",
+      "moisture_content_percent": {
+        "min": 90,
+        "max": 95
+      },
+      "fat_content_percent": {
+        "min": 0.0,
+        "max": 0.1
+      },
+      "ph_range": {
+        "min": 2.9,
+        "max": 3.3
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 2,
+        "max": 5
+      },
+      "confidence": "low",
+      "notes": "Assumes standard pasteurization, not aseptic/UHT; commercial iced tea is often acidified, which gives it a somewhat longer ambient window than milk-based drinks despite the same non-aseptic assumption."
+    },
+    {
+      "id": "frozen_peas",
+      "name": "Frozen peas",
+      "display_name_hi": "जमी हुई मटर",
+      "category": "frozen_foods",
+      "moisture_content_percent": {
+        "min": 75,
+        "max": 80
+      },
+      "fat_content_percent": {
+        "min": 0.3,
+        "max": 0.6
+      },
+      "ph_range": {
+        "min": 6.0,
+        "max": 6.8
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 180,
+        "max": 365
+      },
+      "confidence": "medium",
+      "notes": "Shelf life figure is for frozen (-18C) storage, not room temperature — freezing halts the respiration/spoilage this dataset otherwise tracks via respiration_rate_class, so that field is null here."
+    },
+    {
+      "id": "frozen_paratha",
+      "name": "Frozen paratha (ready-to-cook flatbread)",
+      "display_name_hi": "जमा हुआ पराठा",
+      "category": "frozen_foods",
+      "moisture_content_percent": {
+        "min": 35,
+        "max": 45
+      },
+      "fat_content_percent": {
+        "min": 8,
+        "max": 15
+      },
+      "ph_range": {
+        "min": 5.5,
+        "max": 6.5
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 90,
+        "max": 180
+      },
+      "confidence": "low",
+      "notes": "Shelf life figure is for frozen storage, not room temperature. Layered dough often has oil/ghee between layers, raising fat content versus plain bread."
+    },
+    {
+      "id": "ice_cream",
+      "name": "Ice cream",
+      "display_name_hi": "आइसक्रीम",
+      "category": "frozen_foods",
+      "moisture_content_percent": {
+        "min": 55,
+        "max": 65
+      },
+      "fat_content_percent": {
+        "min": 10,
+        "max": 16
+      },
+      "ph_range": {
+        "min": 6.3,
+        "max": 6.8
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 180,
+        "max": 365
+      },
+      "confidence": "medium",
+      "notes": "Shelf life figure is for frozen storage, not room temperature — ice cream melts within hours at ambient and is not a meaningfully packageable state."
+    },
+    {
+      "id": "frozen_mixed_vegetables",
+      "name": "Frozen mixed vegetables",
+      "display_name_hi": "जमी हुई मिक्स सब्ज़ियां",
+      "category": "frozen_foods",
+      "moisture_content_percent": {
+        "min": 80,
+        "max": 90
+      },
+      "fat_content_percent": {
+        "min": 0.2,
+        "max": 0.5
+      },
+      "ph_range": {
+        "min": 5.5,
+        "max": 6.5
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 180,
+        "max": 365
+      },
+      "confidence": "medium",
+      "notes": "Shelf life figure is for frozen storage, not room temperature; moisture/pH vary by vegetable blend composition."
+    },
+    {
+      "id": "frozen_french_fries",
+      "name": "Frozen french fries (par-fried)",
+      "display_name_hi": "जमी हुई फ्रेंच फ्राइज़",
+      "category": "frozen_foods",
+      "moisture_content_percent": {
+        "min": 45,
+        "max": 55
+      },
+      "fat_content_percent": {
+        "min": 4,
+        "max": 8
+      },
+      "ph_range": {
+        "min": 5.5,
+        "max": 6.2
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 180,
+        "max": 365
+      },
+      "confidence": "low",
+      "notes": "Shelf life figure is for frozen storage, not room temperature; par-frying before freezing adds oil pickup versus raw potato."
+    },
+    {
+      "id": "namkeen_savory_mix",
+      "name": "Namkeen (savory fried snack mix)",
+      "display_name_hi": "नमकीन",
+      "category": "ready_to_eat_snacks",
+      "moisture_content_percent": {
+        "min": 2,
+        "max": 5
+      },
+      "fat_content_percent": {
+        "min": 25,
+        "max": 35
+      },
+      "ph_range": {
+        "min": 5.5,
+        "max": 6.5
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 30,
+        "max": 90
+      },
+      "confidence": "low",
+      "notes": "Deep-fried, high-oil-content snack; rancidity from repeated-use frying oil is a bigger practical risk than for baked snacks like biscuits, hence a shorter shelf life estimate."
+    },
+    {
+      "id": "energy_bar",
+      "name": "Energy bar (oats/nuts/dried fruit, bound)",
+      "display_name_hi": "एनर्जी बार",
+      "category": "ready_to_eat_snacks",
+      "moisture_content_percent": {
+        "min": 8,
+        "max": 15
+      },
+      "fat_content_percent": {
+        "min": 12,
+        "max": 20
+      },
+      "ph_range": {
+        "min": 4.5,
+        "max": 5.5
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 180,
+        "max": 270
+      },
+      "confidence": "low",
+      "notes": "Semi-moist texture (higher moisture than biscuits) combined with nut/fat content gives it a shorter typical shelf life than a fully dry baked snack; formulation varies a lot by brand."
+    },
+    {
+      "id": "roasted_makhana",
+      "name": "Roasted makhana (fox nuts)",
+      "display_name_hi": "भुना मखाना",
+      "category": "ready_to_eat_snacks",
+      "moisture_content_percent": {
+        "min": 8,
+        "max": 12
+      },
+      "fat_content_percent": {
+        "min": 2,
+        "max": 8
+      },
+      "ph_range": {
+        "min": 6.0,
+        "max": 7.0
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 90,
+        "max": 180
+      },
+      "confidence": "low",
+      "notes": "Fat content depends heavily on whether roasted plain or with oil; low-moisture roasted snack, similar general risk profile to other fried/roasted snacks but typically lower-fat."
+    },
+    {
+      "id": "potato_chips",
+      "name": "Potato chips (fried)",
+      "display_name_hi": "आलू के चिप्स",
+      "category": "ready_to_eat_snacks",
+      "moisture_content_percent": {
+        "min": 1,
+        "max": 3
+      },
+      "fat_content_percent": {
+        "min": 30,
+        "max": 38
+      },
+      "ph_range": {
+        "min": 5.5,
+        "max": 6.5
+      },
+      "respiration_rate_class": null,
+      "typical_ambient_shelf_life_days": {
+        "min": 60,
+        "max": 120
+      },
+      "confidence": "medium",
+      "notes": "Very low moisture but very high fat and high surface area (thin slices) make oxidative rancidity the dominant failure mode — needs a strong light/O2 barrier despite not being a wet product."
+    }
+  ]
+}

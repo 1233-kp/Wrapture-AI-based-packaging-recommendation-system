@@ -1,0 +1,537 @@
+{
+  "_meta": {
+    "description": "Reference dataset of packaging material barrier and cost properties used by the recommendation engine. OTR/WVTR values are typical literature ranges for common commercial gauges, not measurements of a specific supplier's product — real performance varies with resin grade, orientation, coatings, and test conditions (temperature/RH). Treat as directional, not a spec sheet.",
+    "units": {
+      "otr": "cm3 / m2 / day / atm, typically measured near 23C, 0% RH unless noted",
+      "wvtr": "g / m2 / day, typically measured near 38C, 90% RH unless noted",
+      "thickness": "microns (um)",
+      "estimated_cost_per_kg_inr": "Indian Rupees per kg of the FINISHED material itself (converted product, not raw resin alone), based on general/typical Indian packaging-material market pricing patterns as of dataset creation — not a live quote, not a specific supplier's price, and not adjusted for order volume. See cost_confidence and _cost_note per material.",
+      "material_weight_multiplier": "Dimensionless — how many times more mass of this material a package typically needs vs. a standard thin flexible film baseline (~1.0), purely from format/density (rigid vs. flexible, thick vs. thin). A rough directional factor grounded in general format/density reasoning and this file's own thickness_range_micron values, NOT precise engineering/weight data. Applied on top of rules.json's packaging_weight_g_per_kg_product_by_category when computing estimated_cost_per_unit_inr — see engine/recommender.py's _estimate_packaging_cost_per_unit. See weight_multiplier_confidence and _weight_multiplier_note per material."
+    },
+    "confidence_levels": {
+      "high": "Consistent across most references for standard commercial gauges",
+      "medium": "Typical range, but varies meaningfully by grade/orientation/supplier",
+      "low": "Rough estimate; highly formulation- or application-dependent"
+    },
+    "breathable": "true only for materials specifically engineered/formatted for active produce ventilation (perforations or vents), not just materials whose plain resin happens to be numerically permeable. Used by the recommender's respiration_class_packaging_boost rule.",
+    "display_name_hi": "Hindi display name for this material, shown in the UI when Hindi is selected. The underlying 'id' stays in English/ASCII always."
+  },
+  "materials": [
+    {
+      "id": "ldpe",
+      "name": "LDPE (Low-Density Polyethylene)",
+      "display_name_hi": "एलडीपीई (LDPE) फिल्म",
+      "category": "flexible_film",
+      "otr_cm3_m2_day_atm": {
+        "min": 7000,
+        "max": 9000
+      },
+      "wvtr_g_m2_day": {
+        "min": 15,
+        "max": 20
+      },
+      "thickness_range_micron": {
+        "min": 25,
+        "max": 250
+      },
+      "cost_tier": "low",
+      "estimated_cost_per_kg_inr": {
+        "min": 100,
+        "max": 150
+      },
+      "cost_confidence": "medium",
+      "_cost_note": "Tracks polyethylene resin cost, a globally traded and fairly volatile commodity feedstock; finished film (converted, printed) sits above raw resin price.",
+      "material_weight_multiplier": {
+        "min": 0.9,
+        "max": 1.1
+      },
+      "weight_multiplier_confidence": "medium",
+      "_weight_multiplier_note": "Standard thin flexible film — the baseline this multiplier is defined against.",
+      "recyclability_rating": "Recyclable (resin code 4), mostly via store drop-off, not standard curbside in most regions",
+      "typical_use_cases": [
+        "bread bags",
+        "produce bags",
+        "shrink wrap",
+        "liner bags"
+      ],
+      "confidence": "medium",
+      "breathable": false
+    },
+    {
+      "id": "hdpe",
+      "name": "HDPE (High-Density Polyethylene)",
+      "display_name_hi": "एचडीपीई (HDPE)",
+      "category": "flexible_film_or_rigid",
+      "otr_cm3_m2_day_atm": {
+        "min": 1500,
+        "max": 3000
+      },
+      "wvtr_g_m2_day": {
+        "min": 4,
+        "max": 10
+      },
+      "thickness_range_micron": {
+        "min": 20,
+        "max": 150
+      },
+      "cost_tier": "low",
+      "estimated_cost_per_kg_inr": {
+        "min": 95,
+        "max": 145
+      },
+      "cost_confidence": "medium",
+      "_cost_note": "Similar commodity-resin volatility to LDPE; bottle/bag conversion adds to raw resin cost.",
+      "material_weight_multiplier": {
+        "min": 1.0,
+        "max": 1.5
+      },
+      "weight_multiplier_confidence": "low",
+      "_weight_multiplier_note": "Spans a real format range from thin bags (near baseline) to semi-rigid bottles/jugs (heavier); category tag alone doesn't distinguish which format a given use case is, hence the wide range.",
+      "recyclability_rating": "Widely recyclable curbside (resin code 2)",
+      "typical_use_cases": [
+        "milk jugs",
+        "dry goods pouches",
+        "rigid bottles",
+        "grain/flour bags"
+      ],
+      "confidence": "medium",
+      "breathable": false
+    },
+    {
+      "id": "pet",
+      "name": "PET (Polyethylene Terephthalate)",
+      "display_name_hi": "पीईटी (PET)",
+      "category": "rigid_or_film",
+      "otr_cm3_m2_day_atm": {
+        "min": 50,
+        "max": 150
+      },
+      "wvtr_g_m2_day": {
+        "min": 15,
+        "max": 40
+      },
+      "thickness_range_micron": {
+        "min": 12,
+        "max": 350
+      },
+      "cost_tier": "medium",
+      "estimated_cost_per_kg_inr": {
+        "min": 110,
+        "max": 170
+      },
+      "cost_confidence": "medium",
+      "_cost_note": "Resin cost plus bottle/tray conversion (blow-molding or thermoforming); bottle-grade PET resin is generally priced close to other commodity plastics.",
+      "material_weight_multiplier": {
+        "min": 1.1,
+        "max": 1.6
+      },
+      "weight_multiplier_confidence": "low",
+      "_weight_multiplier_note": "Spans thin film/trays through bottles, similar to HDPE's format ambiguity — see vented_pet_clamshell for the dedicated rigid-tray case, which is priced separately rather than folded into this range.",
+      "recyclability_rating": "Widely recyclable curbside (resin code 1)",
+      "typical_use_cases": [
+        "beverage bottles",
+        "clamshells",
+        "produce trays",
+        "bakery trays"
+      ],
+      "confidence": "medium",
+      "breathable": false
+    },
+    {
+      "id": "vented_pet_clamshell",
+      "name": "Vented PET clamshell",
+      "display_name_hi": "वेंटेड पीईटी क्लैमशेल",
+      "category": "rigid_or_film",
+      "otr_cm3_m2_day_atm": {
+        "min": 8000,
+        "max": 30000
+      },
+      "wvtr_g_m2_day": {
+        "min": 25,
+        "max": 60
+      },
+      "thickness_range_micron": {
+        "min": 250,
+        "max": 500
+      },
+      "cost_tier": "medium",
+      "estimated_cost_per_kg_inr": {
+        "min": 160,
+        "max": 230
+      },
+      "cost_confidence": "low",
+      "_cost_note": "Same PET resin base as plain PET, but thermoforming plus the venting/perforation step is a more specialized process with less published market pricing data than commodity plastics.",
+      "material_weight_multiplier": {
+        "min": 1.5,
+        "max": 2.0
+      },
+      "weight_multiplier_confidence": "medium",
+      "_weight_multiplier_note": "Always a rigid, thick-gauge tray format (250-500 micron here vs. plain PET's mostly-thinner range) — less format ambiguity than plain PET, so a narrower, higher-confidence multiplier than the shared 'rigid_or_film' category tag alone would suggest.",
+      "recyclability_rating": "Widely recyclable curbside (resin code 1), same stream as standard PET",
+      "typical_use_cases": [
+        "berries",
+        "cherry tomatoes",
+        "salad greens",
+        "grapes",
+        "other high-respiration produce needing rigid protection plus airflow"
+      ],
+      "confidence": "low",
+      "breathable": true
+    },
+    {
+      "id": "pp",
+      "name": "PP (Polypropylene)",
+      "display_name_hi": "पीपी (PP)",
+      "category": "flexible_film_or_rigid",
+      "otr_cm3_m2_day_atm": {
+        "min": 1500,
+        "max": 2500
+      },
+      "wvtr_g_m2_day": {
+        "min": 5,
+        "max": 12
+      },
+      "thickness_range_micron": {
+        "min": 20,
+        "max": 300
+      },
+      "cost_tier": "low",
+      "estimated_cost_per_kg_inr": {
+        "min": 105,
+        "max": 155
+      },
+      "cost_confidence": "medium",
+      "_cost_note": "Commodity polyolefin resin, similar volatility profile to LDPE/HDPE.",
+      "material_weight_multiplier": {
+        "min": 1.0,
+        "max": 1.5
+      },
+      "weight_multiplier_confidence": "low",
+      "_weight_multiplier_note": "Same format ambiguity as HDPE — thin snack-bag film through rigid tubs/containers.",
+      "recyclability_rating": "Recyclable via specialty stream (resin code 5), limited curbside acceptance",
+      "typical_use_cases": [
+        "snack bags",
+        "microwaveable containers",
+        "biscuit/cookie wrap",
+        "rigid tubs"
+      ],
+      "confidence": "medium",
+      "breathable": false
+    },
+    {
+      "id": "metalized_film",
+      "name": "Metalized film (metalized BOPP/PET)",
+      "display_name_hi": "मेटलाइज़्ड फिल्म",
+      "category": "flexible_film_laminate",
+      "otr_cm3_m2_day_atm": {
+        "min": 0.5,
+        "max": 5
+      },
+      "wvtr_g_m2_day": {
+        "min": 0.3,
+        "max": 3
+      },
+      "thickness_range_micron": {
+        "min": 15,
+        "max": 40
+      },
+      "cost_tier": "medium",
+      "estimated_cost_per_kg_inr": {
+        "min": 220,
+        "max": 320
+      },
+      "cost_confidence": "medium",
+      "_cost_note": "Metallization (vacuum deposition onto base BOPP/PET film) is an added processing step, the main driver of the premium over plain film.",
+      "material_weight_multiplier": {
+        "min": 0.9,
+        "max": 1.2
+      },
+      "weight_multiplier_confidence": "medium",
+      "_weight_multiplier_note": "Very thin laminate (15-40 micron here) — close to the flexible-film baseline; the metallized layer adds negligible mass.",
+      "recyclability_rating": "Not typically recyclable (thin metal layer on plastic substrate contaminates plastics recycling streams)",
+      "typical_use_cases": [
+        "chips/snack bags",
+        "coffee pouches",
+        "confectionery wrap requiring light + O2 barrier"
+      ],
+      "confidence": "low",
+      "breathable": false
+    },
+    {
+      "id": "aluminum_foil_laminate",
+      "name": "Aluminum foil laminate",
+      "display_name_hi": "एल्युमिनियम फॉयल लैमिनेट",
+      "category": "flexible_film_laminate",
+      "otr_cm3_m2_day_atm": {
+        "min": 0,
+        "max": 0.1
+      },
+      "wvtr_g_m2_day": {
+        "min": 0,
+        "max": 0.1
+      },
+      "thickness_range_micron": {
+        "min": 20,
+        "max": 100
+      },
+      "cost_tier": "high",
+      "estimated_cost_per_kg_inr": {
+        "min": 360,
+        "max": 520
+      },
+      "cost_confidence": "medium",
+      "_cost_note": "Aluminum content is priced against global metals markets, historically the most volatile input of any material here, plus multilayer lamination processing cost.",
+      "material_weight_multiplier": {
+        "min": 1.0,
+        "max": 1.2
+      },
+      "weight_multiplier_confidence": "medium",
+      "_weight_multiplier_note": "Thin laminate (20-100 micron here), but aluminum is denser than typical polymer film per micron, nudging this slightly above the plain-film baseline.",
+      "recyclability_rating": "Not typically recyclable (multi-layer foil/plastic/paper laminate, hard to separate)",
+      "typical_use_cases": [
+        "retort pouches",
+        "spice/sauce sachets",
+        "pharma blister backing",
+        "long-life liquid cartons"
+      ],
+      "confidence": "medium",
+      "breathable": false
+    },
+    {
+      "id": "pla_biodegradable_film",
+      "name": "Biodegradable / PLA film",
+      "display_name_hi": "बायोडिग्रेडेबल (पीएलए) फिल्म",
+      "category": "flexible_film",
+      "otr_cm3_m2_day_atm": {
+        "min": 100,
+        "max": 300
+      },
+      "wvtr_g_m2_day": {
+        "min": 10,
+        "max": 30
+      },
+      "thickness_range_micron": {
+        "min": 20,
+        "max": 60
+      },
+      "cost_tier": "high",
+      "estimated_cost_per_kg_inr": {
+        "min": 380,
+        "max": 600
+      },
+      "cost_confidence": "low",
+      "_cost_note": "India largely imports PLA resin rather than producing it domestically, so pricing carries import-duty and currency exposure on top of base biopolymer cost — a wider, less certain range than the commodity plastics.",
+      "material_weight_multiplier": {
+        "min": 0.9,
+        "max": 1.1
+      },
+      "weight_multiplier_confidence": "low",
+      "_weight_multiplier_note": "Thin flexible film (20-60 micron here), assumed close to the plastic-film baseline density; less reference data for this format specifically.",
+      "recyclability_rating": "Industrially compostable (needs municipal composting facility); not recyclable with conventional plastics",
+      "typical_use_cases": [
+        "eco-positioned produce bags",
+        "compostable food-service wrap",
+        "short-shelf-life snack packaging"
+      ],
+      "confidence": "low",
+      "breathable": false
+    },
+    {
+      "id": "micro_perforated_film",
+      "name": "Micro-perforated film",
+      "display_name_hi": "माइक्रो-छिद्रित फिल्म",
+      "category": "flexible_film",
+      "otr_cm3_m2_day_atm": {
+        "min": 5000,
+        "max": 50000
+      },
+      "wvtr_g_m2_day": {
+        "min": 20,
+        "max": 60
+      },
+      "thickness_range_micron": {
+        "min": 20,
+        "max": 40
+      },
+      "cost_tier": "low",
+      "estimated_cost_per_kg_inr": {
+        "min": 130,
+        "max": 190
+      },
+      "cost_confidence": "low",
+      "_cost_note": "Same base resin (PP or PE) as plain film plus a perforation step; limited market pricing data specific to this format versus plain LDPE/PP.",
+      "material_weight_multiplier": {
+        "min": 0.9,
+        "max": 1.1
+      },
+      "weight_multiplier_confidence": "low",
+      "_weight_multiplier_note": "Thin flexible film (20-40 micron here), assumed close to baseline; perforation itself removes material rather than adding it.",
+      "recyclability_rating": "Follows base polymer (usually PP or PE film), typically limited curbside acceptance",
+      "typical_use_cases": [
+        "fresh produce bags needing controlled respiration/humidity venting",
+        "mushrooms",
+        "leafy greens"
+      ],
+      "confidence": "low",
+      "breathable": true
+    },
+    {
+      "id": "evoh_film",
+      "name": "EVOH film (as multilayer barrier layer)",
+      "display_name_hi": "EVOH फिल्म",
+      "category": "flexible_film_laminate",
+      "otr_cm3_m2_day_atm": {
+        "min": 0.05,
+        "max": 1
+      },
+      "wvtr_g_m2_day": {
+        "min": 5,
+        "max": 20
+      },
+      "thickness_range_micron": {
+        "min": 5,
+        "max": 25
+      },
+      "cost_tier": "high",
+      "estimated_cost_per_kg_inr": {
+        "min": 300,
+        "max": 480
+      },
+      "cost_confidence": "low",
+      "_cost_note": "EVOH is a specialty barrier resin priced well above commodity plastics, typically used as a thin co-extruded layer within a multilayer structure; this range is for the finished laminate structure, not pure EVOH resin alone.",
+      "material_weight_multiplier": {
+        "min": 0.9,
+        "max": 1.2
+      },
+      "weight_multiplier_confidence": "low",
+      "_weight_multiplier_note": "Used as a very thin co-extruded layer (5-25 micron here) within a larger flexible laminate structure — treated as close to the flexible-film baseline overall, same framing as this material's _cost_note.",
+      "recyclability_rating": "Not recyclable alone; used as a thin co-extruded layer within a multilayer laminate, complicating recycling of the whole structure",
+      "typical_use_cases": [
+        "vacuum-packed meat/cheese",
+        "high-O2-barrier sauce pouches",
+        "MAP trays needing a strong O2 barrier"
+      ],
+      "confidence": "medium",
+      "breathable": false
+    },
+    {
+      "id": "oriented_nylon",
+      "name": "Oriented Nylon / BOPA",
+      "display_name_hi": "ओरिएंटेड नायलॉन",
+      "category": "flexible_film",
+      "otr_cm3_m2_day_atm": {
+        "min": 30,
+        "max": 80
+      },
+      "wvtr_g_m2_day": {
+        "min": 10,
+        "max": 20
+      },
+      "thickness_range_micron": {
+        "min": 15,
+        "max": 25
+      },
+      "cost_tier": "high",
+      "estimated_cost_per_kg_inr": {
+        "min": 260,
+        "max": 400
+      },
+      "cost_confidence": "low",
+      "_cost_note": "Nylon (polyamide) resin costs more than commodity polyolefins, plus the orientation/lamination process; limited India-specific market pricing data available.",
+      "material_weight_multiplier": {
+        "min": 0.9,
+        "max": 1.1
+      },
+      "weight_multiplier_confidence": "low",
+      "_weight_multiplier_note": "Thin flexible film (15-25 micron here), assumed close to the plastic-film baseline density.",
+      "recyclability_rating": "Not typically recyclable when laminated with other polymers (common usage)",
+      "typical_use_cases": [
+        "vacuum/boil-in-bag pouches",
+        "cheese packaging",
+        "puncture-resistant meat packaging"
+      ],
+      "confidence": "low",
+      "breathable": false
+    },
+    {
+      "id": "glass",
+      "name": "Glass (jar/bottle)",
+      "display_name_hi": "कांच",
+      "category": "rigid",
+      "otr_cm3_m2_day_atm": {
+        "min": 0,
+        "max": 0
+      },
+      "wvtr_g_m2_day": {
+        "min": 0,
+        "max": 0
+      },
+      "thickness_range_micron": {
+        "min": 1000,
+        "max": 4000
+      },
+      "cost_tier": "high",
+      "estimated_cost_per_kg_inr": {
+        "min": 20,
+        "max": 45
+      },
+      "cost_confidence": "medium",
+      "_cost_note": "Raw container glass is inexpensive per kg — glass's high overall packaging cost in practice comes from needing far more kg of material per unit packaged (weight) plus transport/breakage logistics, not from a high per-kg material price. See packaging_format_practicality in rules.json for that separate cost factor.",
+      "material_weight_multiplier": {
+        "min": 2.5,
+        "max": 3.0
+      },
+      "weight_multiplier_confidence": "medium",
+      "_weight_multiplier_note": "Dramatically thicker/denser than any film format (1000-4000 micron here) — the direction and rough magnitude of glass needing far more material mass per kg of product is well-established general packaging knowledge, even without precise engineering data for a specific jar/bottle design.",
+      "recyclability_rating": "Widely recyclable curbside, infinitely recyclable without quality loss",
+      "typical_use_cases": [
+        "sauces",
+        "pickles/preserves",
+        "honey",
+        "beverages",
+        "baby food"
+      ],
+      "confidence": "high",
+      "breathable": false
+    },
+    {
+      "id": "paperboard",
+      "name": "Paperboard (uncoated carton board)",
+      "display_name_hi": "पेपरबोर्ड",
+      "category": "rigid_paper",
+      "otr_cm3_m2_day_atm": {
+        "min": 5000,
+        "max": 20000
+      },
+      "wvtr_g_m2_day": {
+        "min": 200,
+        "max": 600
+      },
+      "thickness_range_micron": {
+        "min": 180,
+        "max": 600
+      },
+      "cost_tier": "low",
+      "estimated_cost_per_kg_inr": {
+        "min": 45,
+        "max": 75
+      },
+      "cost_confidence": "medium",
+      "_cost_note": "Depends heavily on pulp source; recycled-content board (common for secondary packaging) trends toward the lower end of this range.",
+      "material_weight_multiplier": {
+        "min": 1.3,
+        "max": 1.8
+      },
+      "weight_multiplier_confidence": "low",
+      "_weight_multiplier_note": "Rigid box/carton format, thicker than any film (180-600 micron here), but paper is much less dense than glass or PET, so the mass multiplier lands well below the rigid-tray/glass range — highly dependent on the specific box design.",
+      "recyclability_rating": "Widely recyclable curbside if uncoated; coated/laminated board is less recyclable and often needs specialty streams",
+      "typical_use_cases": [
+        "cereal/dry-goods boxes",
+        "secondary/outer packaging",
+        "cartons paired with an inner film liner for barrier"
+      ],
+      "confidence": "low",
+      "breathable": false
+    }
+  ]
+}
