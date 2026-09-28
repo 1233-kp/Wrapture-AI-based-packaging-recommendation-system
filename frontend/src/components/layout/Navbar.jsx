@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import { BrandMark } from '../ui/BrandMark'
 import { Button } from '../ui/Button'
+import { InstallAppButton } from '../ui/InstallAppButton'
 import { LanguageToggle } from '../ui/LanguageToggle'
 
 export function Navbar() {
@@ -62,6 +63,7 @@ export function Navbar() {
         </div>
 
         <div className="hidden items-center gap-3 md:flex">
+          <InstallAppButton />
           <LanguageToggle />
           {isAuthenticated ? (
             <Button size="sm" onClick={() => navigate('/app/recommend')}>
@@ -124,6 +126,7 @@ export function Navbar() {
                 )
               )}
               <div className="mt-2 flex flex-col gap-2 border-t border-ink-100 pt-3">
+                <InstallAppButton size="md" variant="secondary" className="w-full" />
                 {isAuthenticated ? (
                   <Button onClick={() => navigate('/app/recommend')}>{t('nav.goToApp')}</Button>
                 ) : (

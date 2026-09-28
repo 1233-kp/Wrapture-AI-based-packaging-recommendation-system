@@ -7,6 +7,7 @@
     "loading": "लोड हो रहा है…",
     "save": "सेव करें",
     "cancel": "रद्द करें",
+    "close": "बंद करें",
     "confirm": "पक्का?",
     "loadReportsError": "रिपोर्ट्स लोड नहीं हो सकीं।",
     "hoursShort": "{{n}} घंटे",
@@ -33,6 +34,13 @@
     "openMenu": "मेन्यू खोलें",
     "closeMenu": "मेन्यू बंद करें",
     "language": "भाषा"
+  },
+  "pwa": {
+    "install": "ऐप इंस्टॉल करें",
+    "iosAddToHomeScreen": "होम स्क्रीन पर जोड़ें",
+    "iosInstructionsTitle": "Wrapture इंस्टॉल करें",
+    "iosInstructionsBody": "Safari के टूलबार में शेयर आइकन पर टैप करें, फिर \"होम स्क्रीन पर जोड़ें\" चुनें।",
+    "iosInstructionsClose": "समझ गया"
   },
   "landing": {
     "pageTitle": "Wrapture — पैकेजिंग का अंदाज़ा लगाना बंद करें",

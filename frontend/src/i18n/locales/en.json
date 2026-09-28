@@ -7,6 +7,7 @@
     "loading": "Loading…",
     "save": "Save",
     "cancel": "Cancel",
+    "close": "Close",
     "confirm": "Confirm?",
     "loadReportsError": "Could not load reports.",
     "hoursShort": "{{n}}h",
@@ -33,6 +34,13 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "language": "Language"
+  },
+  "pwa": {
+    "install": "Install App",
+    "iosAddToHomeScreen": "Add to Home Screen",
+    "iosInstructionsTitle": "Install Wrapture",
+    "iosInstructionsBody": "Tap the Share icon in Safari's toolbar, then choose \"Add to Home Screen\".",
+    "iosInstructionsClose": "Got it"
   },
   "landing": {
     "pageTitle": "Wrapture — Stop guessing your packaging",

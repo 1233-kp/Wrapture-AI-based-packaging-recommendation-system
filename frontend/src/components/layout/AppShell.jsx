@@ -5,6 +5,7 @@ import { useAuth } from '../../context/AuthContext'
 import { cn } from '../../lib/utils'
 import { BrandMark } from '../ui/BrandMark'
 import { Button } from '../ui/Button'
+import { InstallAppButton } from '../ui/InstallAppButton'
 import { LanguageToggle } from '../ui/LanguageToggle'
 
 function useNavItems() {
@@ -94,8 +95,9 @@ export function AppShell() {
           <span className="font-display text-lg font-extrabold text-ink-900">{t('common.brand')}</span>
         </Link>
 
-        <div className="mb-4 px-2">
+        <div className="mb-4 flex items-center gap-2 px-2">
           <LanguageToggle />
+          <InstallAppButton size="sm" variant="secondary" />
         </div>
 
         <nav className="flex flex-1 flex-col gap-1">
