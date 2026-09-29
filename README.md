@@ -28,6 +28,10 @@
   <a href="#-team">Team</a>
 </p>
 
+<p align="center">
+  🔗 <a href="#"><strong>Live App</strong></a> — https://wrapture-ai-based-packaging-recomme.vercel.app/ •
+</p>
+
 ---
 
 ## 🎯 Why This Exists
